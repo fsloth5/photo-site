@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-size: 100%;
+}
+
+body {
+	font-family: "Albert Sans", sans-serif;
+}
+
+ellipse {
+	shape-rendering: geometricPrecision;
+}
+
+.font-size-s {
+	font-size: 1.25rem;
+}
+
+.font-size-m {
+	font-size: 1.5rem;
+}
+
+.font-size-l {
+	font-size: 2.75rem;
+}
+
+.font-weight-n {
+	font-weight: normal;
+}
+
+.padding-sm {
+	padding: 1rem;
+}
+
+.margin-sm {
+	padding: 1rem;
+}
+
+.vbox {
+	display: flex;
+	flex-direction: column;
+}
+
+.hbox {
+	display: flex;
+	flex-direction: row;
+}
+
+.box-spacing-sm {
+	gap: 0.5rem;
+}
+
+.box-spacing-m {
+	gap: 1.5rem;
+}
+
+
+.no-box-spacing {
+	gap: 0;
+}
+
+.centered-main {
+	justify-content: center;
+}
+
+.centered-cross {
+	align-items: center;
+}
+
+.align-start {
+	align-self: flex-start;
+}
+
+.align-end {
+	align-self: flex-end;
+}
+
+.align-bottom {
+	align-self: bottom;
+}
+
+.stretched-height {
+	min-height: 100dvh;
+}
+
+.flex-one {
+	flex: 1;
+}
+
+.flex-two {
+	flex: 2;
+}
+
+.space-85 {
+	flex-basis: 85%;
+	flex-grow: 1;
+}
+
+.flexbox-res-img {
+	max-width: 100%;
+	height: auto;
+	min-width: 0;
+	/* prevents flex children from overflowing */
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.fade-in-text {
+  opacity: 0;
+  animation: fadeInLeft 0.9s ease-in-out forwards;
+}
+
+.fade-text {
+	opacity: 0;
+	animation: fadeIn 1.75s ease-out forwards;
+}
