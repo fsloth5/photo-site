@@ -19,6 +19,10 @@ body {
 	padding: 1rem 1.75rem 0 1.75rem;
 }
 
+#contact-page-content {
+	padding: 1.75rem 0 0 0;
+}
+
 #series-indicator {
 	position: absolute;
 	top: 88%;
@@ -40,6 +44,101 @@ body {
 		width: 1000px;
 	}
 }
+
+.input-wrap {
+	position: relative;
+}
+
+.input-wrap input {
+	width: 100%;
+	box-sizing: border-box;
+	border: none;
+	border-bottom: 2px solid #000;
+	border-radius: 0;
+	outline: none;
+	padding: 8px 0;
+	transition: padding 0.3s ease, border-radius 0.3s ease, border-color 0.3s ease;
+	font-size: 1.5rem;
+}
+
+/* left & right sides */
+.input-wrap::before,
+.input-wrap::after {
+	content: '';
+	position: absolute;
+	width: 2px;
+	height: 0;
+	background: #000;
+	bottom: 0;
+	transition: height 0.15s ease 0.25s;
+	border-radius: 6px;
+}
+
+.input-wrap::before {
+	left: 0;
+}
+
+.input-wrap::after {
+	right: 0;
+}
+
+/* top line (via a <span class="top-line">) */
+.top-line {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 2px;
+	width: 0;
+	background: #000;
+	transition: none;
+	border-radius: 6px;
+}
+
+/* bottom line (via a <span class="bot-line">) */
+.bot-line {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 2px;
+	width: 0;
+	background: #000;
+	transition: width 0.25s ease;
+	border-radius: 6px;
+}
+
+/* on focus */
+.input-wrap:focus-within input {
+	border-color: transparent;
+	padding: 8px 10px;
+	border-radius: 6px;
+}
+
+.input-wrap:focus-within .bot-line {
+	width: 100%;
+}
+
+.input-wrap:focus-within::before,
+.input-wrap:focus-within::after {
+	height: 100%;
+}
+
+.input-wrap:focus-within .top-line {
+	width: 100%;
+	transition: width 0.25s ease 0.4s;
+}
+
+textarea {
+	resize: none;
+	font-size: 1.25rem;
+}
+
+.black-btn {
+	color: white;
+	background-color: black;
+	padding: 1rem;
+	font-size: 1.75rem;
+}
+
 
 .bg-gray {
 	background-color: gray;
@@ -73,6 +172,10 @@ body {
 	padding: 0.5rem;
 }
 
+.padding-m {
+	padding: 1.5rem;
+}
+
 .margin-sm {
 	margin: 1rem;
 }
@@ -95,6 +198,10 @@ body {
 	flex-direction: row;
 }
 
+.box-spacing-xs {
+	gap: 0.25rem;
+}
+
 .box-spacing-sm {
 	gap: 0.5rem;
 }
@@ -105,6 +212,10 @@ body {
 
 .box-spacing-l {
 	gap: 2rem;
+}
+
+.box-spacing-2xl {
+	gap: 6rem;
 }
 
 .no-box-spacing {
@@ -159,6 +270,16 @@ body {
 
 .space-60 {
 	flex-basis: 60%;
+	flex-grow: 1;
+}
+
+.space-35 {
+	flex-basis: 35%;
+	flex-grow: 1;
+}
+
+.space-20 {
+	flex-basis: 20%;
 	flex-grow: 1;
 }
 
@@ -220,4 +341,24 @@ body {
 .scale-on-hover-z:hover {
 	transform: scale(1.05);
 	z-index: 10;
+}
+
+.w100 {
+	width: 100%;
+}
+
+.w50 {
+	width: 50%;
+}
+
+.w35 {
+	width: 35%;
+}
+
+.w2 {
+	width: 2%;
+}
+
+.padding-lr-175 {
+	padding: 0 5.5rem 0 5.5rem;
 }
