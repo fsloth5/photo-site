@@ -11,6 +11,7 @@ body {
 	font-family: "Albert Sans", sans-serif;
 }
 
+
 #home-page-content {
 	padding: 1.75rem 1.75rem 0 1.75rem;
 }
@@ -57,14 +58,17 @@ body {
 	border-radius: 0;
 	outline: none;
 	padding: 8px 0;
-	transition: padding 0.3s ease, border-radius 0.3s ease, border-color 0.3s ease;
+	transition:
+		padding 0.3s ease,
+		border-radius 0.3s ease,
+		border-color 0.3s ease;
 	font-size: 1.5rem;
 }
 
 /* left & right sides */
 .input-wrap::before,
 .input-wrap::after {
-	content: '';
+	content: "";
 	position: absolute;
 	width: 2px;
 	height: 0;
@@ -138,7 +142,6 @@ textarea {
 	padding: 1rem;
 	font-size: 1.75rem;
 }
-
 
 .bg-gray {
 	background-color: gray;
@@ -218,6 +221,10 @@ textarea {
 	gap: 6rem;
 }
 
+.box-spacing-4xl {
+	gap: 18rem;
+}
+
 .no-box-spacing {
 	gap: 0;
 }
@@ -290,6 +297,16 @@ textarea {
 	/* prevents flex children from overflowing */
 }
 
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}
+
 @keyframes fadeIn {
 	from {
 		opacity: 0;
@@ -316,24 +333,23 @@ textarea {
 
 .fade-in-text {
 	opacity: 0;
-	animation: fadeInLeft 0.9s ease-in-out forwards;
+	animation: fadeInLeft 1.10s ease-in-out forwards;
 }
 
-.fade-text {
+.fade {
 	opacity: 0;
-	animation: fadeIn 1.75s ease-out forwards;
+	animation: fadeIn 0.55s ease-out forwards;
 }
 
-.scale-on-hover {
-	transition: transform 0.3s ease;
-}
-
-.scale-on-hover:hover {
-	transform: scale(1.05);
+.fade-out {
+	opacity: 1;
+	animation: fadeOut 1.10s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .scale-on-hover-z {
-	transition: transform 0.3s ease, z-index 0s;
+	transition:
+		transform 0.3s ease,
+		z-index 0s;
 	position: relative;
 	z-index: 0;
 }
@@ -361,4 +377,101 @@ textarea {
 
 .padding-lr-175 {
 	padding: 0 5.5rem 0 5.5rem;
+}
+
+.no-select {
+	user-select: none;
+}
+
+.squish {
+	cursor: pointer;
+}
+
+.squish:active {
+	animation: squish 0.4s ease-out;
+}
+
+@keyframes squish {
+	0% {
+		transform: scale(1, 1);
+	}
+
+	30% {
+		transform: scale(1.3, 0.7);
+	}
+
+	/* squish down */
+	50% {
+		transform: scale(0.9, 1.0);
+	}
+
+	/* overshoot up */
+	70% {
+		transform: scale(1.1, 0.95);
+	}
+
+	/* settle */
+	100% {
+		transform: scale(1, 1);
+	}
+}
+
+.delay_0 {
+	animation-delay: 0s;
+}
+
+.delay_025 {
+	animation-delay: 0.25s;
+}
+
+.delay_075 {
+	animation-delay: 0.75s;
+}
+
+.delay1_5 {
+	animation-delay: 1.5s;
+}
+
+.delay1_6 {
+	animation-delay: 1.6s;
+}
+
+.collapsible {
+	transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+}
+
+.collapsed .collapsible {
+	width: 0;
+	height: 0;
+	opacity: 0;
+	margin: 0;
+}
+
+@keyframes popIn {
+	0% {
+		opacity: 0;
+		transform: scale(0.6)
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1)
+	}
+}
+
+.pop-in {
+	animation: popIn 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+	animation-delay: 0.1s;
+}
+
+.scale-on-hover {
+	transition: transform 0.3s ease;
+}
+
+.scale-on-hover:hover {
+	transform: scale(1.05);
+}
+
+.pop-in.scale-on-hover {
+	transition: none;
 }

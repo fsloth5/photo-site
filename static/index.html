@@ -10,10 +10,9 @@
 
 <body>
 	<!-- Content -->
-	<div id="home-page-content" class="hbox centered-main stretched-height">
+	<div id="home-page-content" class="hbox centered-main stretched-height no-select">
 
-		<div class="vbox centered-main align-start stretched-height"> <!-- 1st Column -->
-
+		<div class="vbox centered-main align-start stretched-height box-spacing-l">
 			<!-- Header -->
 			<div class="hbox centered-cross box-spacing-sm align-start">
 				<img src="/resources/logo.svg" alt="The comany's logo" width="32" height="32">
@@ -23,15 +22,19 @@
 
 			<!-- Quotes -->
 			<div class="vbox box-spacing-sm space-85 padding-sm font-size-s">
-				<p class="fade-text align-end" style="animation-delay: 0s">"Those moments that often
+				<p class="fade align-end delay_0 delayed">"Those moments that
+					often
 					times get overlooked"</p>
 				<div class="flex-one margin-sm"></div>
-				<p class="fade-text align-start margin-sm" style="animation-delay: 0.75s">"I want to
+				<p class="fade align-start margin-sm delay_075 delayed" style="animation-delay: 0.75s">
+					"I
+					want to
 					capture
 					<strong>those</strong> moments"
 				</p>
 				<div class="flex-one margin-sm"></div>
-				<p class="fade-text align-start" style="animation-delay: 1.5s">"And to do that, I only
+				<p class="fade align-start delay1_5 delayed">"And to do that,
+					I only
 					ask one thing...let me
 					into
 					your world even if for just
@@ -39,20 +42,19 @@
 					moment."</p>
 			</div>
 
-			<div class="flex-one margin-sm"></div>
-
 			<!-- Indicator -->
-			<div class="hbox centered-cross box-spacing-m flex-one align-end">
-				<h2 class="fade-in-text font-size-l font-weight-n">Welcome!</h2>
+			<div id="indicator" class="hbox centered-cross box-spacing-m align-end flex-one">
+				<h2 id="indicator-text" class="font-size-l font-weight-n fade-in-text">Welcome!</h2>
 				<div class="vbox box-spacing-sm">
-					<svg width="15" height="15" xmlns="http://www.w3.org/2000/svg">
-						<ellipse cx="7.5" cy="7.5" rx="7.5" ry="7.5" />
-					</svg>
-					<svg width="15" height="15" fill="none" stroke="black"
+					<svg id="indicator-active" width="15" height="15"
 						xmlns="http://www.w3.org/2000/svg">
 						<ellipse cx="7.5" cy="7.5" rx="7.5" ry="7.5" />
 					</svg>
-					<svg width="15" height="15" fill="none" stroke="black"
+					<svg class="collapsible" width="15" height="15" fill="none" stroke="black"
+						xmlns="http://www.w3.org/2000/svg">
+						<ellipse cx="7.5" cy="7.5" rx="7.5" ry="7.5" />
+					</svg>
+					<svg class="collapsible" width="15" height="15" fill="none" stroke="black"
 						xmlns="http://www.w3.org/2000/svg">
 						<ellipse cx="7.5" cy="7.5" rx="7.5" ry="7.5" />
 					</svg>
@@ -62,8 +64,11 @@
 		</div>
 
 		<!-- Image -->
-		<img class="flexbox-res-img" src="/resources/main.webp" alt="A portrait of a woman" width="750">
+		<img class="flexbox-res-img delay1_5 add-fade" src="/resources/main.webp" alt="A portrait of a woman"
+			width="750">
 	</div>
+	<script src="/index.js">
+	</script>
 </body>
 
 </html>

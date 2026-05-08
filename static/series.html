@@ -4,12 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>G.C. Photography</title>
+	<title>G.C. Photography | Series</title>
 	<link href="/styles.css" rel="stylesheet">
 </head>
 
 <body>
-	<div id="series-page-content" class="vbox centered-main centered-cross">
+	<!-- Content -->
+	<div id="series-page-content" class="vbox centered-main centered-cross no-select">
 		<!-- Header -->
 		<div class="hbox centered-cross box-spacing-sm align-start">
 			<img src="/resources/logo.svg" alt="The comany's logo" width="32" height="32">
@@ -18,40 +19,47 @@
 
 		<div class="flex-one margin-l"></div>
 
+		<!-- SeriesThumbnails -->
 		<div class="center-self space-85 pos-rel">
 			<div class="hbox centered-cross">
 				<div style="background-color: transparent; width: 250px; height: 315px">
 				</div>
-				<div class="scale-on-hover" style="background-color: gray; width: 315px; height: 315px">
+				<div class="scale-on-hover pop-in"
+					style="background-color: gray; width: 315px; height: 315px">
 				</div>
 				<div style="background-color: transparent; width: 100px; height: 100px">
 				</div>
-				<div class="scale-on-hover-z"
+				<div class="scale-on-hover-z pop-in"
 					style="background-color: gray; width: 500px; height: 500px">
 				</div>
 				<div style="background-color: transparent; width: 50px; height: 50px">
 				</div>
-				<div class="scale-on-hover" style="background-color: gray; width: 250px; height: 250px">
+				<div class="scale-on-hover pop-in"
+					style="background-color: gray; width: 250px; height: 250px">
 				</div>
 			</div>
 
 			<div class="flex-one margin-m"></div>
 
 			<div class="hbox centered-cross">
-				<div class="scale-on-hover" style="background-color: gray; width: 140px; height: 140px">
+				<div class="scale-on-hover pop-in"
+					style="background-color: gray; width: 140px; height: 140px">
 				</div>
 				<div style="background-color: transparent; width: 50px; height: 140px">
 				</div>
-				<div class="scale-on-hover" style="background-color: gray; width: 550px; height: 190px">
+				<div class="scale-on-hover pop-in"
+					style="background-color: gray; width: 550px; height: 190px">
 				</div>
 				<div style="background-color: transparent; width: 550px; height: 190px">
 				</div>
-				<div class="scale-on-hover" style="background-color: gray; width: 300px; height: 300px">
+				<div class="scale-on-hover pop-in"
+					style="background-color: gray; width: 300px; height: 300px">
 				</div>
 			</div>
 
 		</div>
 
+		<!-- Image -->
 		<img id="series-img" class="flexbox-res-img" src="/resources/series.webp"
 			alt="A photo of a man sitting in a chair">
 
@@ -73,8 +81,8 @@
 			</div>
 		</div>
 	</div>
-
-	</div>
+	<script src="/index.js">
+	</script>
 </body>
 
 </html>
