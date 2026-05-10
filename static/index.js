@@ -1,4 +1,4 @@
-function setupFadeables() {
+function setupFadeables(originalAnimation, animationName, nextPage, timeOut) {
 	const indicatorText = document.getElementById("indicator-text");
 
 	indicatorText.addEventListener("animationend", () => {
@@ -11,43 +11,42 @@ function setupFadeables() {
 
 			indicatorText.classList.add("fade-out");
 
-			delayed.forEach(delay => {
-				delay.classList.remove("fade");
+			delayed.forEach((delay) => {
+				delay.classList.remove(originalAnimation);
+				delay.classList.add("delay_025");
+				delay.classList.add(animationName);
+			});
+
+			addDelay.forEach((delay) => {
 				delay.classList.add("delay_025");
 				delay.classList.add("fade-out");
 			});
-
-			addDelay.forEach(delay => {
-				delay.classList.add("delay_025");
-				delay.classList.add("fade-out");
-			});
-
 
 			document.getElementById("indicator").classList.add("collapsed");
 			document.getElementById("indicator-active").classList.add("fade-out");
 
+			console.log(nextPage);
 			setTimeout(() => {
-				window.location.assign("/series.html");
-			}, 2200);
-
+				window.location.assign(nextPage === "/" ? "/" : `/${nextPage}.html`);
+			}, timeOut);
 		});
-	});
-}
-
-function handlePopIns() {
-	const popIns = document.querySelectorAll(".pop-in");
-	popIns.forEach(pop => {
-		pop.addEventListener('animationend', () => {
-			pop.classList.remove('pop-in');
-		}, { once: true });
 	});
 }
 
 switch (window.location.pathname) {
 	case "/":
-		setupFadeables()
+		setupFadeables("fade", "fade-out", "series", 2200);
 		break;
-	case "/series.html": handlePopIns();
+	case "/series.html": {
+		setupFadeables("pop-in", "pop-out", "contact", 1125);
+		break;
+	}
+	case "/contact.html": {
+		setupFadeables("open", "open", "/", 1125);
+		document.getElementById("panel").classList.toggle("open");
+		break;
+	}
 	default:
+		console.error.log("Unknown page!");
 		break;
 }
