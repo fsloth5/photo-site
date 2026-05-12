@@ -12,7 +12,6 @@ function setupFadeables(handleDelayed, nextPage, timeOut) {
 
 			handleDelayed(document.querySelectorAll(".delayed"));
 
-
 			addDelay.forEach((delay) => {
 				delay.classList.add("delay_025");
 				delay.classList.add("fade-out");
@@ -44,7 +43,19 @@ switch (window.location.pathname) {
 		setupFadeables(removeAndAdd("fade", "fade-out"), "series", 2200);
 		break;
 	case "/series.html": {
-		setupFadeables(removeAndAdd("pop-in", "pop-out"), "contact", 1375);
+		const popIns = document.querySelectorAll(".pop-in");
+		popIns.forEach(popIn => popIn.addEventListener("animationend", () => {
+			popIn.classList.remove("pop-in");
+		}, { once: true }));
+
+		setupFadeables(
+			(delayed) => {
+				delayed.forEach((delay) => {
+					delay.classList.add("delay_025");
+					delay.classList.add("pop-out");
+				});
+			}
+			, "contact", 1375);
 		break;
 	}
 	case "/contact.html": {
