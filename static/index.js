@@ -44,9 +44,15 @@ switch (window.location.pathname) {
 		break;
 	case "/series.html": {
 		const popIns = document.querySelectorAll(".pop-in");
-		popIns.forEach(popIn => popIn.addEventListener("animationend", () => {
-			popIn.classList.remove("pop-in");
-		}, { once: true }));
+		popIns.forEach((popIn) =>
+			popIn.addEventListener(
+				"animationend",
+				() => {
+					popIn.classList.remove("pop-in");
+				},
+				{ once: true },
+			),
+		);
 
 		setupFadeables(
 			(delayed) => {
@@ -54,8 +60,10 @@ switch (window.location.pathname) {
 					delay.classList.add("delay_025");
 					delay.classList.add("pop-out");
 				});
-			}
-			, "contact", 1375);
+			},
+			"contact",
+			1375,
+		);
 		break;
 	}
 	case "/contact.html": {
@@ -65,8 +73,10 @@ switch (window.location.pathname) {
 					delay.classList.add("open");
 					delay.classList.add("delay_025");
 				});
-			}
-			, "/", 1425);
+			},
+			"/",
+			1425,
+		);
 
 		const panel = document.getElementById("panel");
 		panel.classList.add("open");

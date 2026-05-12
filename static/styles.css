@@ -47,9 +47,24 @@ body {
 	pointer-events: none;
 }
 
-@media (min-height: 1024px) {
+@media (min-width: 1440px) {
+	#welcome-img {
+		width: 26%;
+		flex: 1;
+	}
+
 	#series-img {
-		width: 1000px;
+		width: 75%;
+	}
+
+	.bottom-centered {
+		left: 40%;
+	}
+}
+
+@media (min-width: 1920px) {
+	#welcome-img {
+		flex: none;
 	}
 }
 
