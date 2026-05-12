@@ -12,7 +12,7 @@ body {
 }
 
 #home-page-content {
-	padding: 1.75rem 1.75rem 0 1.75rem;
+	padding: 1.95rem 1.75rem 0 1.75rem;
 }
 
 #series-page-content {
@@ -29,8 +29,16 @@ body {
 	left: 45%;
 }
 
+#welcome-img {
+	width: 24%;
+}
+
+#contact-img {
+	width: 33%;
+}
+
 #series-img {
-	width: 800px;
+	width: 80%;
 	position: absolute;
 	top: 50%;
 	left: 50%;

@@ -1,4 +1,4 @@
-function setupFadeables(originalAnimation, animationName, nextPage, timeOut) {
+function setupFadeables(handleDelayed, nextPage, timeOut) {
 	const indicatorText = document.getElementById("indicator-text");
 
 	indicatorText.addEventListener("animationend", () => {
@@ -6,16 +6,12 @@ function setupFadeables(originalAnimation, animationName, nextPage, timeOut) {
 		indicatorText.classList.add("squish");
 
 		indicatorText.addEventListener("pointerup", () => {
-			const delayed = document.querySelectorAll(".delayed");
-			const addDelay = document.querySelectorAll(".add-fade");
-
 			indicatorText.classList.add("fade-out");
 
-			delayed.forEach((delay) => {
-				delay.classList.remove(originalAnimation);
-				delay.classList.add("delay_025");
-				delay.classList.add(animationName);
-			});
+			const addDelay = document.querySelectorAll(".add-fade-out");
+
+			handleDelayed(document.querySelectorAll(".delayed"));
+
 
 			addDelay.forEach((delay) => {
 				delay.classList.add("delay_025");
@@ -33,20 +29,41 @@ function setupFadeables(originalAnimation, animationName, nextPage, timeOut) {
 	});
 }
 
+const removeAndAdd = (originalAnimation, newAnimation) => {
+	return (delayed) => {
+		delayed.forEach((delay) => {
+			delay.classList.remove(originalAnimation);
+			delay.classList.add("delay_025");
+			delay.classList.add(newAnimation);
+		});
+	};
+};
+
 switch (window.location.pathname) {
 	case "/":
-		setupFadeables("fade", "fade-out", "series", 2200);
+		setupFadeables(removeAndAdd("fade", "fade-out"), "series", 2200);
 		break;
 	case "/series.html": {
-		setupFadeables("pop-in", "pop-out", "contact", 1125);
+		setupFadeables(removeAndAdd("pop-in", "pop-out"), "contact", 1375);
 		break;
 	}
 	case "/contact.html": {
-		setupFadeables("open", "open", "/", 1125);
-		document.getElementById("panel").classList.toggle("open");
+		setupFadeables(
+			(delayed) => {
+				delayed.forEach((delay) => {
+					delay.classList.add("open");
+					delay.classList.add("delay_025");
+				});
+			}
+			, "/", 1425);
+
+		const panel = document.getElementById("panel");
+		panel.classList.add("open");
+		panel.getBoundingClientRect(); // force reflow
+		panel.classList.remove("open");
 		break;
 	}
 	default:
-		console.error.log("Unknown page!");
+		console.error("Unknown page!");
 		break;
 }
