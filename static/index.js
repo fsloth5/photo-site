@@ -28,6 +28,18 @@ function setupFadeables(handleDelayed, nextPage, timeOut) {
 	});
 }
 
+function scaleThumbnails() {
+	const windowWidth = document.documentElement.clientWidth;
+
+	const grid = document.getElementById("album-thumbnails");
+	const naturalWidth = grid.scrollWidth;
+	const scale = Math.min(1, windowWidth / naturalWidth);
+
+	grid.style.transform = `scale(${scale})`;
+	grid.style.transformOrigin = "top center";
+}
+
+
 const removeAndAdd = (originalAnimation, newAnimation) => {
 	return (delayed) => {
 		delayed.forEach((delay) => {
@@ -40,9 +52,11 @@ const removeAndAdd = (originalAnimation, newAnimation) => {
 
 switch (window.location.pathname) {
 	case "/":
-		setupFadeables(removeAndAdd("fade", "fade-out"), "series", 2200);
+		setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
 		break;
-	case "/series.html": {
+	case "/albums.html": {
+		scaleThumbnails();
+
 		const popIns = document.querySelectorAll(".pop-in");
 		popIns.forEach((popIn) =>
 			popIn.addEventListener(

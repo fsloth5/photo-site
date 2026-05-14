@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+
 * {
 	margin: 0;
 	padding: 0;
@@ -11,11 +16,16 @@ body {
 	font-family: "Albert Sans", sans-serif;
 }
 
+
+/* ============================================================
+   PAGE LAYOUTS
+   ============================================================ */
+
 #home-page-content {
 	padding: 1.95rem 1.75rem 0 1.75rem;
 }
 
-#series-page-content {
+#album-page-content {
 	padding: 1rem 1.75rem 0 1.75rem;
 }
 
@@ -23,195 +33,99 @@ body {
 	padding: 1.75rem 0 0 0;
 }
 
-.bottom-centered {
-	position: absolute;
-	top: 88%;
-	left: 45%;
+#album-thumbnails {
+	height: 800px;
+	overflow-y: auto;
+	min-height: 0;
+
+	/* Hide scrollbar cross-browser */
+	scrollbar-width: none;
+	/* Firefox */
+	-ms-overflow-style: none;
+	/* IE / Edge */
 }
 
-#welcome-img {
-	width: 24%;
+#album-thumbnails::-webkit-scrollbar {
+	display: none;
+	/* Chrome / Safari / Opera */
 }
 
-#contact-img {
-	width: 33%;
-}
 
-#series-img {
-	width: 80%;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-38%, -44.5%);
-	z-index: 1;
-	pointer-events: none;
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+@media (min-width: 1024px) {
+	#contact-form {
+		flex-basis: 25%;
+		flex-grow: 1;
+	}
+
+	#contact-img {
+		width: 65%;
+	}
+
+	#album-img {
+		top: 40%;
+		width: 67%;
+	}
 }
 
 @media (min-width: 1440px) {
-	#welcome-img {
-		width: 26%;
-		flex: 1;
+	#contact-img {
+		width: 40%;
 	}
 
-	#series-img {
-		width: 75%;
-	}
-
-	.bottom-centered {
-		left: 40%;
+	#album-img {
+		top: 45%;
+		width: 55%;
 	}
 }
 
 @media (min-width: 1920px) {
-	#welcome-img {
-		flex: none;
+	#contact-form {
+		flex-basis: 35%;
+		flex-grow: 1;
+	}
+
+	#contact-img {
+		width: 32%;
+	}
+
+	#album-img {
+		top: 50%;
+		width: 950px;
 	}
 }
 
-.input-wrap {
-	position: relative;
+
+/* ============================================================
+   IMAGES
+   ============================================================ */
+
+#welcome-img {
+	width: 900px;
 }
 
-.input-wrap input {
-	width: 100%;
-	box-sizing: border-box;
-	border: none;
-	border-bottom: 2px solid #000;
-	border-radius: 0;
-	outline: none;
-	padding: 8px 0;
-	transition:
-		padding 0.3s ease,
-		border-radius 0.3s ease,
-		border-color 0.3s ease;
-	font-size: 1.5rem;
-}
-
-/* left & right sides */
-.input-wrap::before,
-.input-wrap::after {
-	content: "";
+#album-img {
 	position: absolute;
-	width: 2px;
-	height: 0;
-	background: #000;
-	bottom: 0;
-	transition: height 0.15s ease 0.25s;
-	border-radius: 6px;
+	left: 55%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	pointer-events: none;
 }
 
-.input-wrap::before {
-	left: 0;
+.flexbox-res-img {
+	max-width: 100%;
+	height: auto;
+	min-width: 0;
+	/* prevents flex children from overflowing */
 }
 
-.input-wrap::after {
-	right: 0;
-}
 
-/* top line (via a <span class="top-line">) */
-.top-line {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 2px;
-	width: 0;
-	background: #000;
-	transition: none;
-	border-radius: 6px;
-}
-
-/* bottom line (via a <span class="bot-line">) */
-.bot-line {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	height: 2px;
-	width: 0;
-	background: #000;
-	transition: width 0.25s ease;
-	border-radius: 6px;
-}
-
-/* on focus */
-.input-wrap:focus-within input {
-	border-color: transparent;
-	padding: 8px 10px;
-	border-radius: 6px;
-}
-
-.input-wrap:focus-within .bot-line {
-	width: 100%;
-}
-
-.input-wrap:focus-within::before,
-.input-wrap:focus-within::after {
-	height: 100%;
-}
-
-.input-wrap:focus-within .top-line {
-	width: 100%;
-	transition: width 0.25s ease 0.4s;
-}
-
-textarea {
-	resize: none;
-	font-size: 1.25rem;
-}
-
-.black-btn {
-	color: white;
-	background-color: black;
-	padding: 1rem;
-	font-size: 1.75rem;
-}
-
-.bg-gray {
-	background-color: gray;
-}
-
-.pos-abs {
-	position: absolute;
-}
-
-.pos-rel {
-	position: relative;
-}
-
-.font-size-s {
-	font-size: 1.25rem;
-}
-
-.font-size-m {
-	font-size: 1.5rem;
-}
-
-.font-size-l {
-	font-size: 2.75rem;
-}
-
-.font-weight-n {
-	font-weight: normal;
-}
-
-.padding-sm {
-	padding: 0.5rem;
-}
-
-.padding-m {
-	padding: 1.5rem;
-}
-
-.margin-sm {
-	margin: 1rem;
-}
-
-.margin-m {
-	margin: 2rem;
-}
-
-.margin-l {
-	margin: 5rem;
-}
+/* ============================================================
+   LAYOUT UTILITIES — FLEXBOX
+   ============================================================ */
 
 .vbox {
 	display: flex;
@@ -312,12 +226,291 @@ textarea {
 	flex-grow: 1;
 }
 
-.flexbox-res-img {
-	max-width: 100%;
-	height: auto;
-	min-width: 0;
-	/* prevents flex children from overflowing */
+
+/* ============================================================
+   LAYOUT UTILITIES — POSITIONING & SIZING
+   ============================================================ */
+
+.bottom-centered {
+	position: absolute;
+	left: 50%;
 }
+
+.pos-abs {
+	position: absolute;
+}
+
+.pos-rel {
+	position: relative;
+}
+
+.w100 {
+	width: 100%;
+}
+
+.w50 {
+	width: 50%;
+}
+
+.w35 {
+	width: 35%;
+}
+
+.w2 {
+	width: 2%;
+}
+
+.overflow-hd {
+	overflow: hidden;
+}
+
+
+/* ============================================================
+   LAYOUT UTILITIES — SPACING
+   ============================================================ */
+
+.padding-sm {
+	padding: 0.5rem;
+}
+
+.padding-m {
+	padding: 1.5rem;
+}
+
+.padding-lr-175 {
+	padding: 0 5.5rem 0 5.5rem;
+}
+
+.margin-sm {
+	margin: 1rem;
+}
+
+.margin-m {
+	margin: 2rem;
+}
+
+.margin-l {
+	margin: 5rem;
+}
+
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
+
+.font-size-s {
+	font-size: 1.25rem;
+}
+
+.font-size-m {
+	font-size: 1.5rem;
+}
+
+.font-size-l {
+	font-size: 2.75rem;
+}
+
+.font-weight-n {
+	font-weight: normal;
+}
+
+
+/* ============================================================
+   COLOR & BACKGROUND UTILITIES
+   ============================================================ */
+
+.bg-gray {
+	background-color: gray;
+}
+
+.bg-white {
+	background-color: white;
+	z-index: 9999;
+}
+
+
+/* ============================================================
+   FORM — INPUT WRAP
+   ============================================================ */
+
+.input-wrap {
+	position: relative;
+}
+
+.input-wrap input {
+	width: 100%;
+	box-sizing: border-box;
+	border: none;
+	border-bottom: 2px solid #000;
+	border-radius: 0;
+	outline: none;
+	padding: 8px 0;
+	transition:
+		padding 0.3s ease,
+		border-radius 0.3s ease,
+		border-color 0.3s ease;
+	font-size: 1.5rem;
+}
+
+/* left & right sides */
+.input-wrap::before,
+.input-wrap::after {
+	content: "";
+	position: absolute;
+	width: 2px;
+	height: 0;
+	background: #000;
+	bottom: 0;
+	transition: height 0.15s ease 0.25s;
+	border-radius: 6px;
+}
+
+.input-wrap::before {
+	left: 0;
+}
+
+.input-wrap::after {
+	right: 0;
+}
+
+/* top line (via a <span class="top-line">) */
+.top-line {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 2px;
+	width: 0;
+	background: #000;
+	transition: none;
+	border-radius: 6px;
+}
+
+/* bottom line (via a <span class="bot-line">) */
+.bot-line {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 2px;
+	width: 0;
+	background: #000;
+	transition: width 0.25s ease;
+	border-radius: 6px;
+}
+
+/* on focus */
+.input-wrap:focus-within input {
+	border-color: transparent;
+	padding: 8px 10px;
+	border-radius: 6px;
+}
+
+.input-wrap:focus-within .bot-line {
+	width: 100%;
+}
+
+.input-wrap:focus-within::before,
+.input-wrap:focus-within::after {
+	height: 100%;
+}
+
+.input-wrap:focus-within .top-line {
+	width: 100%;
+	transition: width 0.25s ease 0.4s;
+}
+
+textarea {
+	resize: none;
+	font-size: 1.25rem;
+}
+
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+
+.black-btn {
+	color: white;
+	background-color: black;
+	padding: 1rem;
+	font-size: 1.75rem;
+}
+
+.panel {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: white;
+	transform: translateY(-100%);
+	transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.panel.open {
+	transform: translateY(0);
+}
+
+.collapsible {
+	transition:
+		width 0.3s ease,
+		height 0.3s ease,
+		opacity 0.3s ease,
+		margin 0.3s ease;
+}
+
+.collapsed .collapsible {
+	width: 0;
+	height: 0;
+	opacity: 0;
+	margin: 0;
+}
+
+
+/* ============================================================
+   INTERACTION UTILITIES
+   ============================================================ */
+
+.no-select {
+	user-select: none;
+}
+
+.squish {
+	cursor: pointer;
+}
+
+.squish:active {
+	animation: squish 0.4s ease-out;
+}
+
+.scale-on-hover {
+	transition: transform 0.3s ease;
+}
+
+.scale-on-hover:hover {
+	transform: scale(1.05);
+}
+
+.scale-on-hover-z {
+	transition:
+		transform 0.3s ease,
+		z-index 0s;
+	position: relative;
+	z-index: 0;
+}
+
+.scale-on-hover-z:hover {
+	transform: scale(1.05);
+	z-index: 1000;
+}
+
+.pop-in.scale-on-hover {
+	transition: none;
+}
+
+
+/* ============================================================
+   ANIMATIONS — KEYFRAMES
+   ============================================================ */
 
 @keyframes fadeOut {
 	from {
@@ -353,66 +546,6 @@ textarea {
 	}
 }
 
-.fade-in-text {
-	opacity: 0;
-	animation: fadeInLeft 1.1s ease-in-out forwards;
-}
-
-.fade {
-	opacity: 0;
-	animation: fadeIn 0.55s ease-out forwards;
-}
-
-.fade-out {
-	opacity: 1;
-	animation: fadeOut 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-.scale-on-hover-z {
-	transition:
-		transform 0.3s ease,
-		z-index 0s;
-	position: relative;
-	z-index: 0;
-}
-
-.scale-on-hover-z:hover {
-	transform: scale(1.05);
-	z-index: 10;
-}
-
-.w100 {
-	width: 100%;
-}
-
-.w50 {
-	width: 50%;
-}
-
-.w35 {
-	width: 35%;
-}
-
-.w2 {
-	width: 2%;
-}
-
-.padding-lr-175 {
-	padding: 0 5.5rem 0 5.5rem;
-}
-
-.no-select {
-	user-select: none;
-}
-
-.squish {
-	cursor: pointer;
-}
-
-.squish:active {
-	animation: squish 0.4s ease-out;
-}
-
 @keyframes squish {
 	0% {
 		transform: scale(1, 1);
@@ -438,6 +571,65 @@ textarea {
 	}
 }
 
+@keyframes popIn {
+	0% {
+		opacity: 0;
+		transform: scale(0.6);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes popOut {
+	0% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	100% {
+		opacity: 0;
+		transform: scale(0.6);
+	}
+}
+
+
+/* ============================================================
+   ANIMATIONS — CLASSES
+   ============================================================ */
+
+.fade-in-text {
+	opacity: 0;
+	animation: fadeInLeft 1.1s ease-in-out forwards;
+}
+
+.fade {
+	opacity: 0;
+	animation: fadeIn 0.55s ease-out forwards;
+}
+
+.fade-out {
+	opacity: 1;
+	animation: fadeOut 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.pop-in {
+	animation: popIn 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+	animation-delay: 0.1s;
+}
+
+.pop-out {
+	animation: popOut 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+	animation-delay: 0.1s;
+}
+
+
+/* ============================================================
+   ANIMATION — DELAYS
+   ============================================================ */
+
 .delay_0 {
 	animation-delay: 0s;
 }
@@ -456,84 +648,4 @@ textarea {
 
 .delay1_6 {
 	animation-delay: 1.6s;
-}
-
-.collapsible {
-	transition:
-		width 0.3s ease,
-		height 0.3s ease,
-		opacity 0.3s ease,
-		margin 0.3s ease;
-}
-
-.collapsed .collapsible {
-	width: 0;
-	height: 0;
-	opacity: 0;
-	margin: 0;
-}
-
-@keyframes popIn {
-	0% {
-		opacity: 0;
-		transform: scale(0.6);
-	}
-
-	100% {
-		opacity: 1;
-		transform: scale(1);
-	}
-}
-
-.pop-in {
-	animation: popIn 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
-	animation-delay: 0.1s;
-}
-
-@keyframes popOut {
-	0% {
-		opacity: 1;
-		transform: scale(1);
-	}
-
-	100% {
-		opacity: 0;
-		transform: scale(0.6);
-	}
-}
-
-.pop-out {
-	animation: popOut 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
-	animation-delay: 0.1s;
-}
-
-.scale-on-hover {
-	transition: transform 0.3s ease;
-}
-
-.scale-on-hover:hover {
-	transform: scale(1.05);
-}
-
-.pop-in.scale-on-hover {
-	transition: none;
-}
-
-.overflow-hd {
-	overflow: hidden;
-}
-
-.panel {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: white;
-	transform: translateY(-100%);
-	transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.panel.open {
-	transform: translateY(0);
 }
