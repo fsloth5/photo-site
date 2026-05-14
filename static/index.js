@@ -39,7 +39,6 @@ function scaleThumbnails() {
 	grid.style.transformOrigin = "top center";
 }
 
-
 const removeAndAdd = (originalAnimation, newAnimation) => {
 	return (delayed) => {
 		delayed.forEach((delay) => {
