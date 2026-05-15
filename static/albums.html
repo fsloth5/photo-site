@@ -10,7 +10,7 @@
 
 <body>
 	<!-- Content -->
-	<div id="album-page-content">
+	<div id="album-page-content" class="stretched-height">
 
 		<!-- Header -->
 		<div class="hbox centered-cross box-spacing-sm align-start fade">
@@ -19,109 +19,35 @@
 		</div>
 
 
-		<div class="flex-one margin-m"></div>
-
 		<div class="vbox centered-main centered-cross no-select stretched-height">
 			<!-- AlbumThumbnails -->
-			<div id="album-thumbnails" class="center-self pos-rel">
-				<div class="hbox centered-cross">
-					<div style="background-color: transparent; width: 250px; height: 315px">
-					</div>
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 315px; height: 315px">
-					</div>
-					<div style="background-color: transparent; width: 100px; height: 100px">
-					</div>
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 500px; height: 500px">
-					</div>
-					<div style="background-color: transparent; width: 50px; height: 50px">
-					</div>
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 250px; height: 250px">
-					</div>
-					<div style="background-color: transparent; width: 50px; height: 50px">
-					</div>
-				</div>
+			<div id="album-thumbnails" class="photo-wall center-self pos-rel">
 
-				<div class="flex-one margin-m"></div>
+				<!-- Row 1 -->
+				<div class="scale-on-hover pop-in delayed photo tall"></div>
+				<div class="scale-on-hover pop-in delayed photo huge"></div>
+				<div class="scale-on-hover pop-in delayed photo medium"></div>
 
-				<div class="hbox centered-cross">
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 140px; height: 140px">
-					</div>
-					<div style="background-color: transparent; width: 50px; height: 140px">
-					</div>
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 550px; height: 190px">
-					</div>
-					<div style="background-color: transparent; width: 550px; height: 190px">
-					</div>
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 300px; height: 300px">
-					</div>
+				<!-- Row 2 -->
+				<div class="scale-on-hover pop-in delayed photo small"></div>
+				<div class="scale-on-hover pop-in delayed photo wide"></div>
+				<div class="scale-on-hover pop-in delayed photo tall"></div>
 
-				</div>
+				<!-- Row 3 -->
+				<div class="scale-on-hover pop-in delayed photo small"></div>
+				<div class="scale-on-hover pop-in delayed photo wide"></div>
+				<div class="scale-on-hover pop-in delayed photo tall"></div>
 
-				<div class="flex-one margin-m"></div>
+				<!-- Row 4 -->
+				<div class="scale-on-hover pop-in delayed photo small"></div>
+				<div class="scale-on-hover pop-in delayed photo wide"></div>
+				<div class="scale-on-hover pop-in delayed photo tall"></div>
 
-				<div class="hbox centered-cross">
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 140px; height: 140px">
-					</div>
-					<div style="background-color: transparent; width: 50px; height: 140px">
-					</div>
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 550px; height: 190px">
-					</div>
-					<div style="background-color: transparent; width: 550px; height: 190px">
-					</div>
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 300px; height: 300px">
-					</div>
+				<!-- Row 5 -->
+				<div class="scale-on-hover pop-in delayed photo tall"></div>
+				<div class="scale-on-hover pop-in delayed photo huge"></div>
+				<div class="scale-on-hover pop-in delayed photo medium"></div>
 
-				</div>
-
-				<div class="flex-one margin-m"></div>
-
-				<div class="hbox centered-cross">
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 140px; height: 140px">
-					</div>
-					<div style="background-color: transparent; width: 50px; height: 140px">
-					</div>
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 550px; height: 190px">
-					</div>
-					<div style="background-color: transparent; width: 550px; height: 190px">
-					</div>
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 300px; height: 300px">
-					</div>
-
-				</div>
-
-				<div class="hbox centered-cross">
-					<div style="background-color: transparent; width: 250px; height: 315px">
-					</div>
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 315px; height: 315px">
-					</div>
-					<div style="background-color: transparent; width: 100px; height: 100px">
-					</div>
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 500px; height: 500px">
-					</div>
-					<div style="background-color: transparent; width: 50px; height: 50px">
-					</div>
-					<div class="scale-on-hover pop-in delayed"
-						style="background-color: gray; width: 250px; height: 250px">
-					</div>
-					<div style="background-color: transparent; width: 50px; height: 50px">
-					</div>
-				</div>
-
-				<div class="flex-one margin-m"></div>
 			</div>
 
 
@@ -131,7 +57,7 @@
 
 			<!-- Indicator -->
 			<div id="indicator" class="bg-white hbox centered-main box-spacing-m align-end">
-				<h2 id="indicator-text" class="fade-in-text font-size-xl font-weight-n">Albums</h2>
+				<h2 id="indicator-text" class="fade-in-text font-size-l font-weight-n">Albums</h2>
 				<div class="vbox box-spacing-sm">
 					<svg class="collapsible" width="15" height="15" fill="none" stroke="black"
 						xmlns="http://www.w3.org/2000/svg">

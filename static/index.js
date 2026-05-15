@@ -27,7 +27,7 @@ function setupFadeables(handleDelayed, nextPage, timeOut) {
 	});
 }
 
-function setupFadeablesMobile(nextPage, timeOut) {
+function setupIndicator(nextPage, timeOut) {
 	const indicatorText = document.getElementById("indicator-text");
 
 	indicatorText.addEventListener("animationend", () => {
@@ -47,17 +47,6 @@ function setupFadeablesMobile(nextPage, timeOut) {
 	});
 }
 
-function scaleThumbnails() {
-	const windowWidth = document.documentElement.clientWidth;
-
-	const grid = document.getElementById("album-thumbnails");
-	const naturalWidth = grid.scrollWidth;
-	const scale = Math.min(1, windowWidth / naturalWidth);
-
-	grid.style.transform = `scale(${scale})`;
-	grid.style.transformOrigin = "top center";
-}
-
 const removeAndAdd = (originalAnimation, newAnimation) => {
 	return (delayed) => {
 		delayed.forEach((delay) => {
@@ -73,11 +62,15 @@ switch (window.location.pathname) {
 		setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
 		break;
 	case "/m_index.html":
-		setupFadeablesMobile("albums", 850);
+		const windowWidth = document.documentElement.clientWidth;
+		console.log(windowWidth);
+		if (windowWidth < 400 || windowWidth == 768) {
+			setupIndicator("albums", 860);
+		} else {
+			setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
+		}
 		break;
 	case "/albums.html": {
-		scaleThumbnails();
-
 		const popIns = document.querySelectorAll(".pop-in");
 		popIns.forEach((popIn) =>
 			popIn.addEventListener(

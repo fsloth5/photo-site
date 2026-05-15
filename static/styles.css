@@ -32,6 +32,8 @@ body {
 }
 
 #album-thumbnails {
+	width: 100%;
+	max-width: 1200px;
 	height: 800px;
 	overflow-y: auto;
 	min-height: 0;
@@ -52,6 +54,12 @@ body {
    RESPONSIVE BREAKPOINTS
    ============================================================ */
 
+@media (max-width: 768px) {
+	#album-thumbnails {
+		height: 400px;
+	}
+}
+
 @media (min-width: 1024px) {
 	#contact-form {
 		flex-basis: 25%;
@@ -63,7 +71,6 @@ body {
 	}
 
 	#album-img {
-		top: 40%;
 		width: 67%;
 	}
 }
@@ -74,7 +81,6 @@ body {
 	}
 
 	#album-img {
-		top: 45%;
 		width: 55%;
 	}
 }
@@ -90,7 +96,6 @@ body {
 	}
 
 	#album-img {
-		top: 50%;
 		width: 950px;
 	}
 }
@@ -109,7 +114,8 @@ body {
 
 #album-img {
 	position: absolute;
-	left: 55%;
+	top: 50%;
+	left: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 1;
 	pointer-events: none;
@@ -487,6 +493,7 @@ textarea {
 
 .scale-on-hover:hover {
 	transform: scale(1.05);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .scale-on-hover-z {
@@ -644,4 +651,41 @@ textarea {
 
 .delay1_6 {
 	animation-delay: 1.6s;
+}
+
+.photo-wall {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	gap: 12px;
+}
+
+/* Base tile */
+.photo-wall .photo {
+	background-color: gray;
+	overflow: hidden;
+}
+
+/* Size variants — tweak heights to taste */
+.photo-wall .photo.small {
+	height: 140px;
+}
+
+.photo-wall .photo.medium {
+	height: 250px;
+}
+
+.photo-wall .photo.tall {
+	height: 315px;
+}
+
+.photo-wall .photo.wide {
+	grid-column: span 2;
+	height: 190px;
+}
+
+.photo-wall .photo.huge {
+	grid-column: span 2;
+	grid-row: span 2;
+	height: 100%;
+	min-height: 320px;
 }
