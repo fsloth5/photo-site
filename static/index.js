@@ -20,7 +20,26 @@ function setupFadeables(handleDelayed, nextPage, timeOut) {
 			document.getElementById("indicator").classList.add("collapsed");
 			document.getElementById("indicator-active").classList.add("fade-out");
 
-			console.log(nextPage);
+			setTimeout(() => {
+				window.location.assign(nextPage === "/" ? "/" : `/${nextPage}.html`);
+			}, timeOut);
+		});
+	});
+}
+
+function setupFadeablesMobile(nextPage, timeOut) {
+	const indicatorText = document.getElementById("indicator-text");
+
+	indicatorText.addEventListener("animationend", () => {
+		indicatorText.classList.remove("fade-in-text");
+		indicatorText.classList.add("squish");
+
+		indicatorText.addEventListener("pointerup", () => {
+			indicatorText.classList.add("fade-out");
+
+			document.getElementById("indicator").classList.add("collapsed");
+			document.getElementById("indicator-active").classList.add("fade-out");
+
 			setTimeout(() => {
 				window.location.assign(nextPage === "/" ? "/" : `/${nextPage}.html`);
 			}, timeOut);
@@ -52,6 +71,9 @@ const removeAndAdd = (originalAnimation, newAnimation) => {
 switch (window.location.pathname) {
 	case "/":
 		setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
+		break;
+	case "/m_index.html":
+		setupFadeablesMobile("albums", 850);
 		break;
 	case "/albums.html": {
 		scaleThumbnails();
