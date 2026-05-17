@@ -57,59 +57,75 @@ const removeAndAdd = (originalAnimation, newAnimation) => {
 	};
 };
 
+const onMobile = () => {
+	if (localStorage.getItem("isOnMobile") === null) {
+		localStorage.setItem("isOnMobile", true);
+	}
+
+	const windowWidth = document.documentElement.clientWidth;
+	console.log(windowWidth);
+	if (windowWidth < 400 || windowWidth == 768) {
+		setupIndicator("albums", 860);
+	} else {
+		setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
+	}
+};
+
+const onAlbums = () => {
+	const popIns = document.querySelectorAll(".pop-in");
+	popIns.forEach((popIn) =>
+		popIn.addEventListener(
+			"animationend",
+			() => {
+				popIn.classList.remove("pop-in");
+			},
+			{ once: true },
+		),
+	);
+
+	setupFadeables(
+		(delayed) => {
+			delayed.forEach((delay) => {
+				delay.classList.add("delay_025");
+				delay.classList.add("pop-out");
+			});
+		},
+		"contact",
+		1375,
+	);
+};
+
+const onContacts = () => {
+	setupFadeables(
+		(delayed) => {
+			delayed.forEach((delay) => {
+				delay.classList.add("open");
+				delay.classList.add("delay_025");
+			});
+		},
+		localStorage.getItem("isOnMobile") ? "mobile" : "/",
+		1425,
+	);
+
+	const panel = document.getElementById("panel");
+	panel.classList.add("open");
+	panel.getBoundingClientRect(); // force reflow
+	panel.classList.remove("open");
+};
+
 switch (window.location.pathname) {
 	case "/":
 		setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
 		break;
-	case "/m_index.html":
-		const windowWidth = document.documentElement.clientWidth;
-		console.log(windowWidth);
-		if (windowWidth < 400 || windowWidth == 768) {
-			setupIndicator("albums", 860);
-		} else {
-			setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
-		}
+	case "/mobile.html":
+		onMobile();
 		break;
 	case "/albums.html": {
-		const popIns = document.querySelectorAll(".pop-in");
-		popIns.forEach((popIn) =>
-			popIn.addEventListener(
-				"animationend",
-				() => {
-					popIn.classList.remove("pop-in");
-				},
-				{ once: true },
-			),
-		);
-
-		setupFadeables(
-			(delayed) => {
-				delayed.forEach((delay) => {
-					delay.classList.add("delay_025");
-					delay.classList.add("pop-out");
-				});
-			},
-			"contact",
-			1375,
-		);
+		onAlbums();
 		break;
 	}
 	case "/contact.html": {
-		setupFadeables(
-			(delayed) => {
-				delayed.forEach((delay) => {
-					delay.classList.add("open");
-					delay.classList.add("delay_025");
-				});
-			},
-			"/",
-			1425,
-		);
-
-		const panel = document.getElementById("panel");
-		panel.classList.add("open");
-		panel.getBoundingClientRect(); // force reflow
-		panel.classList.remove("open");
+		onContacts();
 		break;
 	}
 	default:
