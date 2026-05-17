@@ -54,9 +54,19 @@ body {
    RESPONSIVE BREAKPOINTS
    ============================================================ */
 
+@media (max-width: 375px) {
+	.font-size-l {
+		font-size: 1.75rem;
+	}
+}
+
 @media (max-width: 768px) {
 	#album-thumbnails {
-		height: 400px;
+		height: 450px;
+	}
+
+	#album-img {
+		width: 100%;
 	}
 }
 
@@ -71,7 +81,7 @@ body {
 	}
 
 	#album-img {
-		width: 67%;
+		width: 60%;
 	}
 }
 
@@ -81,7 +91,7 @@ body {
 	}
 
 	#album-img {
-		width: 55%;
+		width: 950px;
 	}
 }
 
@@ -93,10 +103,6 @@ body {
 
 	#contact-img {
 		width: 32%;
-	}
-
-	#album-img {
-		width: 950px;
 	}
 }
 
