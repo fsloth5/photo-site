@@ -1,3 +1,20 @@
+switch (window.location.pathname) {
+	case "/":
+		onHome();
+		break;
+	case "/albums.html": {
+		onAlbums();
+		break;
+	}
+	case "/contact.html": {
+		onContacts();
+		break;
+	}
+	default:
+		console.error("Unknown page!");
+		break;
+}
+
 function setupFadeables(handleDelayed, nextPage, timeOut) {
 	const indicatorText = document.getElementById("indicator-text");
 
@@ -47,7 +64,7 @@ function setupIndicator(nextPage, timeOut) {
 	});
 }
 
-const removeAndAdd = (originalAnimation, newAnimation) => {
+function removeAndAdd(originalAnimation, newAnimation) {
 	return (delayed) => {
 		delayed.forEach((delay) => {
 			delay.classList.remove(originalAnimation);
@@ -55,9 +72,23 @@ const removeAndAdd = (originalAnimation, newAnimation) => {
 			delay.classList.add(newAnimation);
 		});
 	};
-};
+}
 
-const onHomeInMobilePhones = () => {
+function onHome() {
+	const windowWidth = document.documentElement.clientWidth;
+
+	if (windowWidth < 400 || windowWidth === 768) {
+		setupIndicator("albums", 860);
+	} else {
+		setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
+	}
+
+	if (windowWidth < 1024) {
+		onHomeInMobilePhones();
+	}
+}
+
+function onHomeInMobilePhones() {
 	const contentContainer = document.getElementById("home-page-content");
 	contentContainer.classList.replace("hbox", "vbox");
 
@@ -91,23 +122,9 @@ const onHomeInMobilePhones = () => {
 	const spacer = document.createElement("div");
 	spacer.classList.add("flex-one", "margin-sm");
 	contentContainer.appendChild(spacer);
-};
+}
 
-const onHome = () => {
-	const windowWidth = document.documentElement.clientWidth;
-
-	if (windowWidth < 400 || windowWidth === 768) {
-		setupIndicator("albums", 860);
-	} else {
-		setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
-	}
-
-	if (windowWidth < 1024) {
-		onHomeInMobilePhones();
-	}
-};
-
-const onAlbums = () => {
+function onAlbums() {
 	const popIns = document.querySelectorAll(".pop-in");
 	popIns.forEach((popIn) =>
 		popIn.addEventListener(
@@ -129,9 +146,9 @@ const onAlbums = () => {
 		"contact",
 		1375,
 	);
-};
+}
 
-const onContacts = () => {
+function onContacts() {
 	if (document.documentElement.clientWidth <= 1024) {
 		document.getElementById("contact-img").remove();
 	}
@@ -151,21 +168,4 @@ const onContacts = () => {
 	panel.classList.add("open");
 	panel.getBoundingClientRect(); // force reflow
 	panel.classList.remove("open");
-};
-
-switch (window.location.pathname) {
-	case "/":
-		onHome();
-		break;
-	case "/albums.html": {
-		onAlbums();
-		break;
-	}
-	case "/contact.html": {
-		onContacts();
-		break;
-	}
-	default:
-		console.error("Unknown page!");
-		break;
 }
