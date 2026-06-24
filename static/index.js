@@ -1,3 +1,5 @@
+let inactivityTimer = null;
+
 switch (window.location.pathname) {
 	case "/":
 		onHome();
@@ -83,7 +85,7 @@ function onHome() {
 		setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
 	}
 
-	if (windowWidth < 1024) {
+	if (windowWidth <= 768) {
 		onHomeInMobilePhones();
 	}
 }
@@ -109,14 +111,18 @@ function onHomeInMobilePhones() {
 
 	const quotesContainer = document.getElementById("quotes-container");
 	mainImage.remove();
+
 	const textToSplit = quotesContainer.lastElementChild;
 	quotesContainer.appendChild(mainImage);
 	textToSplit.innerText = '"And to do that, I only ask one thing...';
+	textToSplit.classList.replace("t-align-start", "t-align-end");
+
 	const remainingText = document.createElement("p");
 	remainingText.innerText =
 		'let me into your world even if for just a brief moment."';
 	remainingText.classList.add(...textToSplit.classList);
-	remainingText.classList.replace("t-align-start", "t-align-center");
+	remainingText.classList.replace("t-align-end", "t-align-center");
+
 	quotesContainer.appendChild(remainingText);
 
 	const spacer = document.createElement("div");
@@ -151,6 +157,12 @@ function onAlbums() {
 function onContacts() {
 	if (document.documentElement.clientWidth <= 1024) {
 		document.getElementById("contact-img").remove();
+
+		const indicatorContainer = document.getElementById("indicator");
+		const indicators = indicatorContainer.lastElementChild;
+		indicators.classList.replace("vbox", "hbox");
+		indicators.classList.replace("centered-main", "centered-cross");
+		indicators.classList.add("center-self");
 	}
 
 	setupFadeables(
@@ -160,7 +172,7 @@ function onContacts() {
 				delay.classList.add("delay_025");
 			});
 		},
-		localStorage.getItem("isOnMobile") ? "mobile" : "/",
+		"/",
 		1425,
 	);
 
