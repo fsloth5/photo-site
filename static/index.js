@@ -155,6 +155,11 @@ function onAlbums() {
 }
 
 function onContacts() {
+	const panel = document.getElementById("panel");
+	panel.classList.add("open");
+	panel.getBoundingClientRect(); // force reflow
+	panel.classList.remove("open");
+
 	if (document.documentElement.clientWidth <= 1024) {
 		document.getElementById("contact-img").remove();
 
@@ -175,9 +180,4 @@ function onContacts() {
 		"/",
 		1425,
 	);
-
-	const panel = document.getElementById("panel");
-	panel.classList.add("open");
-	panel.getBoundingClientRect(); // force reflow
-	panel.classList.remove("open");
 }
