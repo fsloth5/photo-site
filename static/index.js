@@ -1,5 +1,3 @@
-let inactivityTimer = null;
-
 switch (window.location.pathname) {
 	case "/":
 		onHome();
@@ -31,10 +29,10 @@ function setupFadeables(handleDelayed, nextPage, timeOut) {
 
 			handleDelayed(document.querySelectorAll(".delayed"));
 
-			addDelay.forEach((delay) => {
+			for (const delay of addDelay) {
 				delay.classList.add("delay_025");
 				delay.classList.add("fade-out");
-			});
+			}
 
 			document.getElementById("indicator").classList.add("collapsed");
 			document.getElementById("indicator-active").classList.add("fade-out");
@@ -68,26 +66,17 @@ function setupIndicator(nextPage, timeOut) {
 
 function removeAndAdd(originalAnimation, newAnimation) {
 	return (delayed) => {
-		delayed.forEach((delay) => {
+		for (const delay of delayed) {
 			delay.classList.remove(originalAnimation);
 			delay.classList.add("delay_025");
 			delay.classList.add(newAnimation);
-		});
+		}
 	};
 }
 
 function onHome() {
-	const windowWidth = document.documentElement.clientWidth;
-
-	if (windowWidth < 400 || windowWidth === 768) {
-		setupIndicator("albums", 860);
-	} else {
-		setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
-	}
-
-	if (windowWidth <= 768) {
-		onHomeInMobilePhones();
-	}
+	setupIndicator("albums", 860);
+	setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
 }
 
 function onHomeInMobilePhones() {
@@ -132,22 +121,22 @@ function onHomeInMobilePhones() {
 
 function onAlbums() {
 	const popIns = document.querySelectorAll(".pop-in");
-	popIns.forEach((popIn) =>
+	for (const popIn of popIns) {
 		popIn.addEventListener(
 			"animationend",
 			() => {
 				popIn.classList.remove("pop-in");
 			},
 			{ once: true },
-		),
-	);
+		);
+	}
 
 	setupFadeables(
 		(delayed) => {
-			delayed.forEach((delay) => {
+			for (const delay of delayed) {
 				delay.classList.add("delay_025");
 				delay.classList.add("pop-out");
-			});
+			}
 		},
 		"contact",
 		1375,
@@ -172,10 +161,10 @@ function onContacts() {
 
 	setupFadeables(
 		(delayed) => {
-			delayed.forEach((delay) => {
+			for (const delay of delayed) {
 				delay.classList.add("open");
 				delay.classList.add("delay_025");
-			});
+			}
 		},
 		"/",
 		1425,

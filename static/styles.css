@@ -56,6 +56,14 @@ body {
    ============================================================ */
 
 @media (max-width: 768px) {
+	#indicator-text {
+		font-size: 2.15rem;
+	}
+
+	#scale-welcome-text {
+		font-size: 1.15rem;
+	}
+
 	#welcome-img {
 		width: 100%;
 		height: 100%;
@@ -79,6 +87,14 @@ body {
 }
 
 @media (min-width: 769px) {
+	#indicator-text {
+		font-size: 2.85rem;
+	}
+
+	#scale-welcome-text {
+		font-size: 1.5rem;
+	}
+
 	#welcome-img {
 		width: 100%;
 		height: 100%;
@@ -363,6 +379,9 @@ body {
 /* ============================================================
    TYPOGRAPHY UTILITIES
    ============================================================ */
+.center-txt {
+	text-align: center;
+}
 
 .font-size-s {
 	font-size: 1rem;
@@ -413,10 +432,7 @@ body {
 	border-radius: 0;
 	outline: none;
 	padding: 8px 0;
-	transition:
-		padding 0.3s ease,
-		border-radius 0.3s ease,
-		border-color 0.3s ease;
+	transition: padding 0.3s ease, border-radius 0.3s ease, border-color 0.3s ease;
 	font-size: 1.5rem;
 }
 
@@ -518,11 +534,8 @@ textarea {
 }
 
 .collapsible {
-	transition:
-		width 0.3s ease,
-		height 0.3s ease,
-		opacity 0.3s ease,
-		margin 0.3s ease;
+	transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease, margin 0.3s
+		ease;
 }
 
 .collapsed .collapsible {
@@ -561,9 +574,7 @@ textarea {
 }
 
 .scale-on-hover-z {
-	transition:
-		transform 0.3s ease,
-		z-index 0s;
+	transition: transform 0.3s ease, z-index 0s;
 	position: relative;
 	z-index: 0;
 }
