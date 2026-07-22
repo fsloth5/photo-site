@@ -150,8 +150,6 @@ function onContacts() {
 	panel.classList.remove("open");
 
 	if (document.documentElement.clientWidth <= 1024) {
-		document.getElementById("contact-img").remove();
-
 		const indicatorContainer = document.getElementById("indicator");
 		const indicators = indicatorContainer.lastElementChild;
 		indicators.classList.replace("vbox", "hbox");

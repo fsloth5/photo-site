@@ -126,6 +126,11 @@ body {
 		flex-shrink: 1;
 		min-width: 0;
 	}
+
+	#contact-img {
+		width: 33%;
+		display: block;
+	}
 }
 
 @media (min-width: 1280px) {
@@ -139,11 +144,6 @@ body {
 	#welcome-img {
 		width: 50%;
 		height: 50%;
-	}
-
-	#contact-img {
-		width: 33%;
-		display: block;
 	}
 }
 
