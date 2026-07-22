@@ -368,6 +368,10 @@ body {
 	margin: 1rem;
 }
 
+.margin-bt-sm {
+	margin: 0 0 1rem 0;
+}
+
 .margin-m {
 	margin: 2rem;
 }
