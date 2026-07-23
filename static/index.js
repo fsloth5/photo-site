@@ -139,7 +139,7 @@ function onAlbums() {
 			"delayed",
 			"photo",
 			PHOTO_WALL_COVER_SIZES[
-				Math.floor(Math.random() * PHOTO_WALL_COVER_SIZES.length)
+			Math.floor(Math.random() * PHOTO_WALL_COVER_SIZES.length)
 			],
 		);
 		return cover;
@@ -170,17 +170,10 @@ function onAlbums() {
 	setupFadeables(
 		(delayed) => {
 			for (const delay of delayed) {
+				delay.classList.add("delay_015");
 				if (delay.classList.contains("rotate-180")) {
-					delay.classList.add("unrotate-180");
-					delay.addEventListener(
-						"animationend",
-						() => {
-							delay.classList.add("pop-out");
-						},
-						{ once: true },
-					);
+					delay.classList.replace("rotate-180", "unrotate_180-popout");
 				} else {
-					delay.classList.add("delay_015");
 					delay.classList.add("pop-out");
 				}
 			}
