@@ -20,12 +20,11 @@ body {
    ============================================================ */
 
 #home-page-content {
-	padding: 1.95rem 1.75rem 0 1.75rem;
-	gap: 3rem;
+	padding: 1.75rem 0.75rem 0 0.75rem;
 }
 
 #album-page-content {
-	padding: 1rem 1.75rem 0 1.75rem;
+	padding: 1.75rem 0.5rem 0 0.5rem;
 }
 
 #contact-page-content {
@@ -69,15 +68,11 @@ body {
 		height: 100%;
 	}
 
-	#album-thumbnails {
-		height: 450px;
+	.header {
+		flex-direction: column !important;
 	}
 
-	#contact-header {
-		flex-direction: column;
-	}
-
-	#contact-header-bspacer {
+	.header-bspacer {
 		display: none;
 	}
 
@@ -104,7 +99,7 @@ body {
 		display: none;
 	}
 
-	#contact-header-bspacer {
+	.header-bspacer {
 		display: none;
 	}
 }
@@ -130,6 +125,10 @@ body {
 	#contact-img {
 		width: 33%;
 		display: block;
+	}
+
+	.header {
+		flex-direction: row;
 	}
 }
 
@@ -195,6 +194,7 @@ body {
 	height: auto;
 	min-width: 0;
 	/* prevents flex children from overflowing */
+	margin: 0 0 1em 0;
 }
 
 /* ============================================================
@@ -209,6 +209,14 @@ body {
 .hbox {
 	display: flex;
 	flex-direction: row;
+}
+
+.display-none {
+	display: none;
+}
+
+.display-block {
+	display: block;
 }
 
 .box-spacing-xs {
@@ -341,6 +349,14 @@ body {
 	overflow: hidden;
 }
 
+.obj-fit-cover {
+	object-fit: cover;
+}
+
+.rotate-180 {
+	transform: rotate(180deg);
+}
+
 /* ============================================================
    LAYOUT UTILITIES — SPACING
    ============================================================ */
@@ -354,6 +370,10 @@ body {
 
 .padding-m {
 	padding: 1.5rem;
+}
+
+.padding-l {
+	padding: 2rem;
 }
 
 .padding-lr-175 {
@@ -384,6 +404,18 @@ body {
    TYPOGRAPHY UTILITIES
    ============================================================ */
 .center-txt {
+	text-align: center;
+}
+
+.t-align-start {
+	text-align: start;
+}
+
+.t-align-end {
+	text-align: end;
+}
+
+.t-align-center {
 	text-align: center;
 }
 
@@ -549,6 +581,43 @@ textarea {
 	margin: 0;
 }
 
+.photo-wall {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	gap: 12px;
+}
+
+/* Base tile */
+.photo-wall .photo {
+	background-color: gray;
+	overflow: hidden;
+}
+
+/* Size variants — tweak heights to taste */
+.photo-wall .photo.small {
+	height: 140px;
+}
+
+.photo-wall .photo.medium {
+	height: 250px;
+}
+
+.photo-wall .photo.tall {
+	height: 315px;
+}
+
+.photo-wall .photo.wide {
+	grid-column: span 2;
+	height: 190px;
+}
+
+.photo-wall .photo.huge {
+	grid-column: span 2;
+	grid-row: span 2;
+	height: 100%;
+	min-height: 320px;
+}
+
 /* ============================================================
    INTERACTION UTILITIES
    ============================================================ */
@@ -590,6 +659,10 @@ textarea {
 
 .pop-in.scale-on-hover {
 	transition: none;
+}
+
+.unrotate-180 {
+	animation: rotate 0.25s ease-in 1;
 }
 
 /* ============================================================
@@ -679,6 +752,16 @@ textarea {
 	}
 }
 
+@keyframes rotate {
+	from {
+		transform: rotate(180deg);
+	}
+
+	to {
+		transform: rotate(0);
+	}
+}
+
 /* ============================================================
    ANIMATIONS — CLASSES
    ============================================================ */
@@ -716,6 +799,10 @@ textarea {
 	animation-delay: 0s;
 }
 
+.delay_015 {
+	animation-delay: 0.15s;
+}
+
 .delay_025 {
 	animation-delay: 0.25s;
 }
@@ -730,53 +817,4 @@ textarea {
 
 .delay1_6 {
 	animation-delay: 1.6s;
-}
-
-.photo-wall {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-	gap: 12px;
-}
-
-/* Base tile */
-.photo-wall .photo {
-	background-color: gray;
-	overflow: hidden;
-}
-
-/* Size variants — tweak heights to taste */
-.photo-wall .photo.small {
-	height: 140px;
-}
-
-.photo-wall .photo.medium {
-	height: 250px;
-}
-
-.photo-wall .photo.tall {
-	height: 315px;
-}
-
-.photo-wall .photo.wide {
-	grid-column: span 2;
-	height: 190px;
-}
-
-.photo-wall .photo.huge {
-	grid-column: span 2;
-	grid-row: span 2;
-	height: 100%;
-	min-height: 320px;
-}
-
-.t-align-start {
-	text-align: start;
-}
-
-.t-align-end {
-	text-align: end;
-}
-
-.t-align-center {
-	text-align: center;
 }
