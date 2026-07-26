@@ -26,7 +26,6 @@ function setupFadeables(handleDelayed, nextPage, timeOut) {
 
 	indicatorText.addEventListener("animationend", () => {
 		indicatorText.classList.remove("fade-in-text");
-		indicatorText.classList.add("squish");
 
 		indicatorText.addEventListener("pointerup", () => {
 			indicatorText.classList.add("fade-out");
@@ -55,7 +54,6 @@ function setupIndicator(nextPage, timeOut) {
 
 	indicatorText.addEventListener("animationend", () => {
 		indicatorText.classList.remove("fade-in-text");
-		indicatorText.classList.add("squish");
 
 		indicatorText.addEventListener("pointerup", () => {
 			indicatorText.classList.add("fade-out");
@@ -139,9 +137,10 @@ function onAlbums() {
 			"delayed",
 			"photo",
 			PHOTO_WALL_COVER_SIZES[
-			Math.floor(Math.random() * PHOTO_WALL_COVER_SIZES.length)
+				Math.floor(Math.random() * PHOTO_WALL_COVER_SIZES.length)
 			],
 		);
+
 		return cover;
 	};
 
@@ -172,7 +171,7 @@ function onAlbums() {
 			for (const delay of delayed) {
 				delay.classList.add("delay_015");
 				if (delay.classList.contains("rotate-180")) {
-					delay.classList.replace("rotate-180", "unrotate_180-popout");
+					delay.classList.add("unrotate_180-popout");
 				} else {
 					delay.classList.add("pop-out");
 				}
@@ -214,8 +213,25 @@ function onAlbums() {
 
 	const addFade = (el) => el.classList.add("fade-out");
 
+	const modal = document.getElementById("photo-modal");
+	modal.addEventListener("pointerdown", (e) => {
+		if (e.target === modal) {
+			modal.classList.add("closing");
+		}
+	});
+
+	modal.addEventListener("animationend", (e) => {
+		if (e.animationName === "slideDown") {
+			modal.classList.remove("closing");
+			modal.close();
+		}
+	});
+
 	const onPointerDown = (e) => {
-		if (state.lastSet) return;
+		if (state.lastSet) {
+			modal.showModal();
+			return;
+		}
 
 		const selectedAlbumCover = e.target;
 		if (!selectedAlbumCover.classList.contains("photo")) return;

@@ -4,6 +4,10 @@
    RESET & BASE
    ============================================================ */
 
+:root {
+	--border-radius: 2px;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -13,6 +17,35 @@
 
 body {
 	font-family: "Albert Sans", sans-serif;
+}
+
+dialog {
+	border: none;
+	border-radius: var(--border-radius);
+	padding: 28px;
+	max-width: 380px;
+	width: 90%;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	position: fixed;
+	inset: 0;
+	margin: auto;
+}
+
+dialog[open] {
+	animation: slideIn 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+dialog::backdrop {
+	background: rgba(0, 0, 0, 0.5);
+	animation: fadeIn 0.45s ease forwards;
+}
+
+dialog.closing {
+	animation: slideDown 0.4s ease-in forwards;
+}
+
+dialog.closing::backdrop {
+	animation: fadeOut 0.4s ease forwards;
 }
 
 /* ============================================================
@@ -194,7 +227,15 @@ body {
 	height: auto;
 	min-width: 0;
 	/* prevents flex children from overflowing */
-	margin: 0 0 1em 0;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+
+.black-bg {
+	background: black;
 }
 
 /* ============================================================
@@ -217,6 +258,10 @@ body {
 
 .display-block {
 	display: block;
+}
+
+.box-spacing-xxs {
+	gap: 0.15rem;
 }
 
 .box-spacing-xs {
@@ -465,7 +510,7 @@ body {
 	box-sizing: border-box;
 	border: none;
 	border-bottom: 2px solid #000;
-	border-radius: 0;
+	border-radius: var(--border-radius);
 	outline: none;
 	padding: 8px 0;
 	transition: padding 0.3s ease, border-radius 0.3s ease, border-color 0.3s ease;
@@ -482,7 +527,7 @@ body {
 	background: #000;
 	bottom: 0;
 	transition: height 0.15s ease 0.25s;
-	border-radius: 6px;
+	border-radius: var(--border-radius);
 }
 
 .input-wrap::before {
@@ -502,7 +547,7 @@ body {
 	width: 0;
 	background: #000;
 	transition: none;
-	border-radius: 6px;
+	border-radius: var(--border-radius);
 }
 
 /* bottom line (via a <span class="bot-line">) */
@@ -514,14 +559,14 @@ body {
 	width: 0;
 	background: #000;
 	transition: width 0.25s ease;
-	border-radius: 6px;
+	border-radius: var(--border-radius);
 }
 
 /* on focus */
 .input-wrap:focus-within input {
 	border-color: transparent;
 	padding: 8px 10px;
-	border-radius: 6px;
+	border-radius: var(--border-radius);
 }
 
 .input-wrap:focus-within .bot-line {
@@ -541,6 +586,7 @@ body {
 textarea {
 	resize: none;
 	font-size: 1.25rem;
+	border-radius: var(--border-radius);
 }
 
 /* ============================================================
@@ -591,6 +637,7 @@ textarea {
 .photo-wall .photo {
 	background-color: gray;
 	overflow: hidden;
+	border-radius: var(--border-radius);
 }
 
 /* Size variants — tweak heights to taste */
@@ -760,6 +807,30 @@ textarea {
 
 	to {
 		transform: rotate(0);
+	}
+}
+
+@keyframes slideDown {
+	from {
+		transform: translateY(0);
+		opacity: 1;
+	}
+
+	to {
+		transform: translateY(-120%);
+		opacity: 0;
+	}
+}
+
+@keyframes slideIn {
+	0% {
+		transform: translateY(120%);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translateY(0);
+		opacity: 1;
 	}
 }
 
