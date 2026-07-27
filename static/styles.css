@@ -155,11 +155,6 @@ dialog.closing::backdrop {
 		min-width: 0;
 	}
 
-	#contact-img {
-		width: 33%;
-		display: block;
-	}
-
 	.header {
 		flex-direction: row;
 	}
@@ -183,6 +178,13 @@ dialog.closing::backdrop {
 	#welcome-img {
 		width: 100%;
 		height: 100%;
+	}
+}
+
+@media (min-width: 1800px) {
+	#contact-img {
+		width: 33%;
+		display: block;
 	}
 }
 

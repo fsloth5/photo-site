@@ -5,6 +5,18 @@ const PAGE_TRANSITION_DELAY = "delay_015";
 
 const state = { lastSet: null };
 
+function isOnMobile() {
+	const userAgentCheck =
+		/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+			navigator.userAgent,
+		);
+
+	const touchCheck = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+	const widthCheck = window.innerWidth <= 768;
+
+	return userAgentCheck || (touchCheck && widthCheck);
+}
+
 switch (window.location.pathname) {
 	case "/":
 		onHome();
@@ -93,48 +105,22 @@ function onHome() {
 	setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
 }
 
-function onHomeInMobilePhones() {
-	const contentContainer = document.getElementById("home-page-content");
-	contentContainer.classList.replace("hbox", "vbox");
-
-	contentContainer.firstElementChild.lastElementChild.classList.replace(
-		"align-end",
-		"center-self",
-	);
-
-	const headerContainer = contentContainer.firstElementChild.firstElementChild;
-
-	headerContainer.classList.replace("centered-cross", "centered-main");
-	headerContainer.classList.remove("align-start");
-
-	const mainImage = document.getElementById("welcome-img");
-	mainImage.src = "/resources/main_mobile.webp";
-	mainImage.classList.remove("w900px");
-	mainImage.classList.add("w100");
-
-	const quotesContainer = document.getElementById("quotes-container");
-	mainImage.remove();
-
-	const textToSplit = quotesContainer.lastElementChild;
-	quotesContainer.appendChild(mainImage);
-	textToSplit.innerText = '"And to do that, I only ask one thing...';
-	textToSplit.classList.replace("t-align-start", "t-align-end");
-
-	const remainingText = document.createElement("p");
-	remainingText.innerText =
-		'let me into your world even if for just a brief moment."';
-	remainingText.classList.add(...textToSplit.classList);
-	remainingText.classList.replace("t-align-end", "t-align-center");
-
-	quotesContainer.appendChild(remainingText);
-
-	const spacer = document.createElement("div");
-	spacer.classList.add("flex-one", "margin-sm");
-	contentContainer.appendChild(spacer);
-}
-
 function onAlbums() {
 	readjustHeader();
+
+	const modal = document.getElementById("photo-modal");
+	modal.addEventListener("pointerdown", (e) => {
+		if (e.target === modal) {
+			modal.classList.add("closing");
+		}
+	});
+
+	modal.addEventListener("animationend", (e) => {
+		if (e.animationName === "slideDown") {
+			modal.classList.remove("closing");
+			modal.close();
+		}
+	});
 
 	let albumsCovers = document.getElementById("album-thumbnails");
 
@@ -230,20 +216,6 @@ function onAlbums() {
 	});
 
 	const addFade = (el) => el.classList.add("fade-out");
-
-	const modal = document.getElementById("photo-modal");
-	modal.addEventListener("pointerdown", (e) => {
-		if (e.target === modal) {
-			modal.classList.add("closing");
-		}
-	});
-
-	modal.addEventListener("animationend", (e) => {
-		if (e.animationName === "slideDown") {
-			modal.classList.remove("closing");
-			modal.close();
-		}
-	});
 
 	const onPointerDown = (e) => {
 		if (state.lastSet) {
