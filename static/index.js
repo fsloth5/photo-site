@@ -1,21 +1,9 @@
 const PHOTO_WALL_COVER_SIZES = ["small", "medium", "tall", "wide", "huge"];
 const GRAY_PLACEHOLDER =
 	'data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3Crect width="1" height="1" fill="%23cccccc"/%3E%3C/svg%3E';
-const PAGE_TRANSITION_DELAY = "delay_015";
+const ANIMATION_DELAY = "delay_015";
 
 const state = { lastSet: null };
-
-function isOnMobile() {
-	const userAgentCheck =
-		/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-			navigator.userAgent,
-		);
-
-	const touchCheck = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-	const widthCheck = window.innerWidth <= 768;
-
-	return userAgentCheck || (touchCheck && widthCheck);
-}
 
 switch (window.location.pathname) {
 	case "/":
@@ -34,7 +22,7 @@ switch (window.location.pathname) {
 		break;
 }
 
-function setupFadeables(handleDelayed, nextPage, timeOut) {
+function setupFadeables(handleAnimatedIn, nextPage, timeOut) {
 	const indicatorText = document.getElementById("indicator-text");
 
 	indicatorText.addEventListener(
@@ -51,12 +39,11 @@ function setupFadeables(handleDelayed, nextPage, timeOut) {
 		() => {
 			indicatorText.classList.add("fade-out");
 
-			const addDelay = document.querySelectorAll(".add-fade-out");
+			handleAnimatedIn(document.querySelectorAll(".animated"));
 
-			handleDelayed(document.querySelectorAll(".delayed"));
+			const addFadeOut = document.querySelectorAll(".add-fade-out");
 
-			for (const delay of addDelay) {
-				delay.classList.add("delay_015");
+			for (const delay of addFadeOut) {
 				delay.classList.add("fade-out");
 			}
 
@@ -71,38 +58,307 @@ function setupFadeables(handleDelayed, nextPage, timeOut) {
 	);
 }
 
-function setupIndicator(nextPage, timeOut) {
-	const indicatorText = document.getElementById("indicator-text");
-
-	indicatorText.addEventListener("animationend", () => {
-		indicatorText.classList.remove("fade-in-text");
-
-		indicatorText.addEventListener("pointerup", () => {
-			indicatorText.classList.add("fade-out");
-
-			document.getElementById("indicator").classList.add("collapsed");
-			document.getElementById("indicator-active").classList.add("fade-out");
-
-			setTimeout(() => {
-				window.location.assign(nextPage === "/" ? "/" : `/${nextPage}.html`);
-			}, timeOut);
-		});
-	});
-}
-
-function removeAndAdd(originalAnimation, newAnimation) {
-	return (delayed) => {
-		for (const delay of delayed) {
-			delay.classList.remove(originalAnimation);
-			delay.classList.add(PAGE_TRANSITION_DELAY);
-			delay.classList.add(newAnimation);
-		}
-	};
-}
-
 function onHome() {
-	setupIndicator("albums", 860);
-	setupFadeables(removeAndAdd("fade", "fade-out"), "albums", 2200);
+	function createHomePageContentMobile() {
+		// Root container
+		const homePageContent = document.createElement("div");
+		homePageContent.id = "home-page-content";
+		homePageContent.classList.add("vbox", "centered-cross", "stretched-height");
+
+		// Header row (logo + title)
+		const headerRow = document.createElement("div");
+		headerRow.classList.add(
+			"hbox",
+			"centered-cross",
+			"box-spacing-sm",
+			"fade",
+			ANIMATION_DELAY,
+			"no-wrap",
+		);
+
+		const logo = document.createElement("img");
+		logo.src = "/resources/logo.svg";
+		logo.alt = "The comany's logo";
+		logo.width = 32;
+		logo.height = 32;
+
+		const title = document.createElement("h1");
+		title.classList.add("font-size-m");
+		title.textContent = "G.C. Photography";
+
+		headerRow.appendChild(logo);
+		headerRow.appendChild(title);
+
+		// Welcome image
+		const welcomeImg = document.createElement("img");
+		welcomeImg.id = "welcome-img";
+		welcomeImg.classList.add(
+			"flexbox-res-img",
+			ANIMATION_DELAY,
+			"fade",
+			"add-fade-out",
+		);
+		welcomeImg.src = "/resources/main.webp";
+		welcomeImg.alt = "A portrait of a woman";
+
+		// Caption / welcome-text
+		const welcomeText = document.createElement("div");
+		welcomeText.id = "welcome-text";
+		welcomeText.classList.add("vbox", "center-txt", "margin-m");
+
+		const p1 = document.createElement("p");
+		p1.classList.add(ANIMATION_DELAY, "fade", "animated", "add-fade-out");
+		p1.textContent = "Those moments that often times get overlooked.";
+
+		const p2 = document.createElement("p");
+		p2.classList.add(ANIMATION_DELAY, "fade", "animated", "add-fade-out");
+		p2.textContent =
+			"I want to capture them...and in order to do that I ask, let me into your world even if just for a brief moment.";
+
+		welcomeText.appendChild(p1);
+		welcomeText.appendChild(p2);
+
+		// Indicator
+		const indicator = document.createElement("div");
+		indicator.id = "indicator";
+		indicator.classList.add(
+			"hbox",
+			"centered-cross",
+			"box-spacing-m",
+			"align-end",
+			"flex-one",
+		);
+
+		const indicatorText = document.createElement("h2");
+		indicatorText.id = "indicator-text";
+		indicatorText.classList.add(
+			"fade-in-text",
+			"font-size-xl",
+			"font-weight-n",
+			"squish",
+		);
+		indicatorText.textContent = "Welcome!";
+
+		const dotsContainer = document.createElement("div");
+		dotsContainer.classList.add(
+			"vbox",
+			"box-spacing-sm",
+			ANIMATION_DELAY,
+			"fade",
+		);
+
+		const svgNS = "http://www.w3.org/2000/svg";
+
+		function createEllipseSvg({ id, collapsible }) {
+			const svg = document.createElementNS(svgNS, "svg");
+			svg.setAttribute("width", "15");
+			svg.setAttribute("height", "15");
+			if (id) svg.id = id;
+			if (collapsible) {
+				svg.classList.add("collapsible");
+				svg.setAttribute("fill", "none");
+				svg.setAttribute("stroke", "black");
+			}
+
+			const ellipse = document.createElementNS(svgNS, "ellipse");
+			ellipse.setAttribute("cx", "7.5");
+			ellipse.setAttribute("cy", "7.5");
+			ellipse.setAttribute("rx", "7.5");
+			ellipse.setAttribute("ry", "7.5");
+
+			svg.appendChild(ellipse);
+			return svg;
+		}
+
+		const activeDot = createEllipseSvg({
+			id: "indicator-active",
+			collapsible: false,
+		});
+		const dot2 = createEllipseSvg({ collapsible: true });
+		const dot3 = createEllipseSvg({ collapsible: true });
+
+		dotsContainer.appendChild(activeDot);
+		dotsContainer.appendChild(dot2);
+		dotsContainer.appendChild(dot3);
+
+		indicator.appendChild(indicatorText);
+		indicator.appendChild(dotsContainer);
+
+		// Assemble everything
+		homePageContent.appendChild(headerRow);
+		homePageContent.appendChild(welcomeImg);
+		homePageContent.appendChild(welcomeText);
+		homePageContent.appendChild(indicator);
+
+		return homePageContent;
+	}
+
+	function createHomePageContentDesktop() {
+		const svgNS = "http://www.w3.org/2000/svg";
+
+		function createEllipseSvg({ id, collapsible }) {
+			const svg = document.createElementNS(svgNS, "svg");
+			svg.setAttribute("width", "15");
+			svg.setAttribute("height", "15");
+			if (id) svg.id = id;
+			if (collapsible) {
+				svg.classList.add("collapsible");
+				svg.setAttribute("fill", "none");
+				svg.setAttribute("stroke", "black");
+			}
+
+			const ellipse = document.createElementNS(svgNS, "ellipse");
+			ellipse.setAttribute("cx", "7.5");
+			ellipse.setAttribute("cy", "7.5");
+			ellipse.setAttribute("rx", "7.5");
+			ellipse.setAttribute("ry", "7.5");
+
+			svg.appendChild(ellipse);
+			return svg;
+		}
+
+		// Root container
+		const homePageContent = document.createElement("div");
+		homePageContent.id = "home-page-content";
+		homePageContent.classList.add("vbox", "centered-cross", "stretched-height");
+
+		// Header row (logo + title)
+		const headerRow = document.createElement("div");
+		headerRow.classList.add(
+			"hbox",
+			"centered-cross",
+			"align-start",
+			"box-spacing-sm",
+			"fade",
+			ANIMATION_DELAY,
+		);
+
+		const logo = document.createElement("img");
+		logo.src = "/resources/logo.svg";
+		logo.alt = "The comany's logo";
+		logo.width = 32;
+		logo.height = 32;
+
+		const title = document.createElement("h1");
+		title.classList.add("font-size-m");
+		title.textContent = "G.C. Photography";
+
+		headerRow.appendChild(logo);
+		headerRow.appendChild(title);
+
+		// Content row (welcome-text + welcome-img side by side)
+		const contentRow = document.createElement("div");
+		contentRow.classList.add("hbox", "centered-main");
+
+		// Welcome text column
+		const welcomeText = document.createElement("div");
+		welcomeText.id = "welcome-text";
+		welcomeText.classList.add("vbox", "center-txt", "margin-m");
+
+		const p1 = document.createElement("p");
+		p1.classList.add(ANIMATION_DELAY, "fade", "animated", "add-fade-out");
+		p1.textContent = "Those moments that often times get overlooked.";
+
+		const spacer1 = document.createElement("div");
+		spacer1.classList.add("flex-one", "margin-m");
+
+		const p2 = document.createElement("p");
+		p2.classList.add(ANIMATION_DELAY, "fade", "animated", "add-fade-out");
+		p2.textContent =
+			"I want to capture them...and in order to do that I ask, let me into your world even if just for a brief moment.";
+
+		const spacer2 = document.createElement("div");
+		spacer2.classList.add("flex-one", "margin-m");
+
+		// Indicator
+		const indicator = document.createElement("div");
+		indicator.id = "indicator";
+		indicator.classList.add(
+			"hbox",
+			"centered-cross",
+			"box-spacing-m",
+			"align-end",
+			"flex-one",
+		);
+
+		const indicatorText = document.createElement("h2");
+		indicatorText.id = "indicator-text";
+		indicatorText.classList.add(
+			"fade-in-text",
+			"font-size-xl",
+			"font-weight-n",
+			"squish",
+		);
+		indicatorText.textContent = "Welcome!";
+
+		const dotsContainer = document.createElement("div");
+		dotsContainer.classList.add(
+			"vbox",
+			"box-spacing-sm",
+			ANIMATION_DELAY,
+			"fade",
+		);
+
+		const activeDot = createEllipseSvg({
+			id: "indicator-active",
+			collapsible: false,
+		});
+		const dot2 = createEllipseSvg({ collapsible: true });
+		const dot3 = createEllipseSvg({ collapsible: true });
+
+		dotsContainer.appendChild(activeDot);
+		dotsContainer.appendChild(dot2);
+		dotsContainer.appendChild(dot3);
+
+		indicator.appendChild(indicatorText);
+		indicator.appendChild(dotsContainer);
+
+		// Assemble welcome-text
+		welcomeText.appendChild(p1);
+		welcomeText.appendChild(spacer1);
+		welcomeText.appendChild(p2);
+		welcomeText.appendChild(spacer2);
+		welcomeText.appendChild(indicator);
+
+		// Welcome image
+		const welcomeImg = document.createElement("img");
+		welcomeImg.id = "welcome-img";
+		welcomeImg.classList.add(
+			"flexbox-res-img",
+			ANIMATION_DELAY,
+			"fade",
+			"add-fade-out",
+		);
+		welcomeImg.src = "/resources/main.webp";
+		welcomeImg.alt = "A portrait of a woman";
+
+		// Assemble content row
+		contentRow.appendChild(welcomeText);
+		contentRow.appendChild(welcomeImg);
+
+		// Assemble everything
+		homePageContent.appendChild(headerRow);
+		homePageContent.appendChild(contentRow);
+
+		return homePageContent;
+	}
+
+	document.body.appendChild(
+		window.innerWidth > 1024
+			? createHomePageContentDesktop()
+			: createHomePageContentMobile(),
+	);
+
+	setupFadeables(
+		(elements) => {
+			for (const animated of elements) {
+				animated.classList.remove(ANIMATION_DELAY);
+				animated.classList.remove("fade");
+			}
+		},
+		"albums",
+		1025,
+	);
 }
 
 function onAlbums() {
@@ -138,7 +394,7 @@ function onAlbums() {
 		cover.classList.add(
 			"scale-on-hover",
 			"pop-in",
-			"delayed",
+			"animated",
 			"photo",
 			PHOTO_WALL_COVER_SIZES[
 				Math.floor(Math.random() * PHOTO_WALL_COVER_SIZES.length)
@@ -171,18 +427,18 @@ function onAlbums() {
 	resetPopIns();
 
 	setupFadeables(
-		(delayed) => {
-			for (const delay of delayed) {
-				delay.classList.add(PAGE_TRANSITION_DELAY);
-				if (delay.classList.contains("rotate-180")) {
-					delay.classList.add("unrotate_180-popout");
+		(elements) => {
+			for (const animation of elements) {
+				animation.classList.add(ANIMATION_DELAY);
+				if (animation.classList.contains("rotate-180")) {
+					animation.classList.add("unrotate_180-popout");
 				} else {
-					delay.classList.add("pop-out");
+					animation.classList.add("pop-out");
 				}
 			}
 		},
 		"contact",
-		1375,
+		1125,
 	);
 
 	const arrow =
@@ -299,14 +555,14 @@ function onContacts() {
 	readjustHeader();
 
 	setupFadeables(
-		(delayed) => {
-			for (const delay of delayed) {
-				delay.classList.add("open");
-				delay.classList.add(PAGE_TRANSITION_DELAY);
+		(elements) => {
+			for (const animated of elements) {
+				animated.classList.add("open");
+				animated.classList.add(ANIMATION_DELAY);
 			}
 		},
 		"/",
-		1425,
+		905,
 	);
 }
 
