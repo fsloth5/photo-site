@@ -1,6 +1,7 @@
 const PHOTO_WALL_COVER_SIZES = ["small", "medium", "tall", "wide", "huge"];
 const GRAY_PLACEHOLDER =
 	'data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3Crect width="1" height="1" fill="%23cccccc"/%3E%3C/svg%3E';
+const PAGE_TRANSITION_DELAY = "delay_015";
 
 const state = { lastSet: null };
 
@@ -24,10 +25,18 @@ switch (window.location.pathname) {
 function setupFadeables(handleDelayed, nextPage, timeOut) {
 	const indicatorText = document.getElementById("indicator-text");
 
-	indicatorText.addEventListener("animationend", () => {
-		indicatorText.classList.remove("fade-in-text");
+	indicatorText.addEventListener(
+		"animationend",
+		(e) => {
+			if (e.animationName !== "fadeInLeft") return;
+			indicatorText.classList.remove("fade-in-text");
+		},
+		{ once: true },
+	);
 
-		indicatorText.addEventListener("pointerup", () => {
+	indicatorText.addEventListener(
+		"pointerup",
+		() => {
 			indicatorText.classList.add("fade-out");
 
 			const addDelay = document.querySelectorAll(".add-fade-out");
@@ -35,7 +44,7 @@ function setupFadeables(handleDelayed, nextPage, timeOut) {
 			handleDelayed(document.querySelectorAll(".delayed"));
 
 			for (const delay of addDelay) {
-				delay.classList.add("delay_025");
+				delay.classList.add("delay_015");
 				delay.classList.add("fade-out");
 			}
 
@@ -45,8 +54,9 @@ function setupFadeables(handleDelayed, nextPage, timeOut) {
 			setTimeout(() => {
 				window.location.assign(nextPage === "/" ? "/" : `/${nextPage}.html`);
 			}, timeOut);
-		});
-	});
+		},
+		{ once: true },
+	);
 }
 
 function setupIndicator(nextPage, timeOut) {
@@ -72,7 +82,7 @@ function removeAndAdd(originalAnimation, newAnimation) {
 	return (delayed) => {
 		for (const delay of delayed) {
 			delay.classList.remove(originalAnimation);
-			delay.classList.add("delay_025");
+			delay.classList.add(PAGE_TRANSITION_DELAY);
 			delay.classList.add(newAnimation);
 		}
 	};
@@ -128,6 +138,14 @@ function onAlbums() {
 
 	let albumsCovers = document.getElementById("album-thumbnails");
 
+	document.getElementById("hq-icon").addEventListener("animationend", (e) => {
+		if (e.animationName !== "squish") return;
+		const target = e.target;
+		const showHq = target.dataset.showHq === "false";
+		target.dataset.showHq = showHq;
+		target.src = showHq ? "/resources/hq-active.svg" : "/resources/hq.svg";
+	});
+
 	const makePhotoCover = () => {
 		const cover = document.createElement("div");
 
@@ -169,7 +187,7 @@ function onAlbums() {
 	setupFadeables(
 		(delayed) => {
 			for (const delay of delayed) {
-				delay.classList.add("delay_015");
+				delay.classList.add(PAGE_TRANSITION_DELAY);
 				if (delay.classList.contains("rotate-180")) {
 					delay.classList.add("unrotate_180-popout");
 				} else {
@@ -185,7 +203,7 @@ function onAlbums() {
 		document.getElementById("indicator").firstElementChild.lastElementChild
 			.firstElementChild;
 
-	arrow.addEventListener("pointerup", () => {
+	arrow.addEventListener("pointerdown", () => {
 		if (!state.lastSet) return;
 
 		while (albumsCovers.firstElementChild) {
@@ -312,7 +330,7 @@ function onContacts() {
 		(delayed) => {
 			for (const delay of delayed) {
 				delay.classList.add("open");
-				delay.classList.add("delay_025");
+				delay.classList.add(PAGE_TRANSITION_DELAY);
 			}
 		},
 		"/",

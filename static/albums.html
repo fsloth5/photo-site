@@ -13,11 +13,11 @@
 	<div id="album-page-content" class="stretched-height margin-bt-sm no-select">
 
 		<dialog id="photo-modal">
-			<div class="vbox centered-main box-spacing-sm no-select">
+			<div class="vbox centered-main centered-cross box-spacing-sm no-select padding-sm">
 				<!-- Image -->
-				<img class="flexbox-res-img fade add-fade-out" src="/resources/series.webp" alt="">
+				<img class="flexbox-res-img fade add-fade-out" src="/resources/model.jpg" alt="">
 
-				<img class="icon align-end squish" src="/resources/hq.svg"
+				<img data-show-hq="false" id="hq-icon" class="icon align-end squish" src="/resources/hq.svg"
 					alt="Show high quality version">
 
 				<h2 class="center-txt">Caption</h2>
@@ -61,13 +61,13 @@
 			<!-- Indicator -->
 			<div id="indicator" class="hbox centered-main box-spacing-m">
 				<div class="vbox center-main">
-					<h2 id="indicator-text"
-						class="fade-in-text font-size-xl font-weight-n squish">Albums
+					<h2 id="indicator-text" class="fade-in-text font-size-xl font-weight-n squish">
+						Albums
 					</h2>
-					<div class="hbox center-main center-cross box-spacing-xs align-start">
+					<div class="hbox centered-main centered-cross box-spacing-xs align-start">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
 							height="24" fill="currentColor"
-							class="display-none rotate-180 delayed">
+							class="display-none rotate-180 delayed cursor-point">
 							<path
 								d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z" />
 						</svg>

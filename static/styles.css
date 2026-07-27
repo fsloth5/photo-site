@@ -23,7 +23,7 @@ dialog {
 	border: none;
 	border-radius: var(--border-radius);
 	padding: 28px;
-	max-width: 380px;
+	max-width: 400px;
 	width: 90%;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 	position: fixed;
@@ -616,8 +616,7 @@ textarea {
 }
 
 .collapsible {
-	transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease, margin 0.3s
-		ease;
+	transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
 }
 
 .collapsed .collapsible {
@@ -676,7 +675,7 @@ textarea {
 	user-select: none;
 }
 
-.squish {
+.squish:hover {
 	cursor: pointer;
 }
 
@@ -709,8 +708,12 @@ textarea {
 }
 
 .unrotate_180-popout {
-	animation: rotate 1s ease-in-out 1, popOut 420ms
-		cubic-bezier(0.34, 1.56, 0.64, 1) both;
+	pointer-events: none;
+	animation: rotate 1s ease-in-out 1, popOut 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.cursor-point {
+	cursor: pointer;
 }
 
 /* ============================================================
@@ -719,21 +722,25 @@ textarea {
 
 @keyframes fadeOut {
 	from {
+		pointer-events: none;
 		opacity: 1;
 	}
 
 	to {
+		pointer-events: none;
 		opacity: 0;
 	}
 }
 
 @keyframes fadeIn {
 	from {
+		pointer-events: none;
 		opacity: 0;
 		transform: translateY(8px);
 	}
 
 	to {
+		pointer-events: "";
 		opacity: 1;
 		transform: translateY(0);
 	}
@@ -741,11 +748,13 @@ textarea {
 
 @keyframes fadeInLeft {
 	from {
+		pointer-events: none;
 		opacity: 0;
 		transform: translateX(-50px);
 	}
 
 	to {
+		pointer-events: "";
 		opacity: 1;
 		transform: translateX(0);
 	}
