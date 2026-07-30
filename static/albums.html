@@ -13,39 +13,21 @@
 	<div id="album-page-content" class="stretched-height margin-bt-sm no-select">
 
 		<dialog id="photo-modal">
-			<div class="vbox centered-main box-spacing-sm no-select padding-sm">
-				<!-- Image -->
-				<img class="flexbox-res-img fade add-fade-out" src="/resources/series.webp" alt="">
+			<div class="vbox centered-main centered-cross box-spacing-sm no-select padding-m">
+				<svg id="modal-close-btn" class="align-end icon cursor-point" viewBox="0 0 200 200"
+					xmlns="http://www.w3.org/2000/svg">
+					<line x1="40" y1="40" x2="160" y2="160" stroke="black" stroke-width="20"
+						stroke-linecap="round" />
+					<line x1="160" y1="40" x2="40" y2="160" stroke="black" stroke-width="20"
+						stroke-linecap="round" />
+				</svg>
+
+				<img id="modal-img" src="/resources/main2.webp" alt="">
 
 				<img data-show-hq="false" id="hq-icon" class="icon align-end squish"
 					src="/resources/hq.svg" alt="Show high quality version">
 
 				<h2 class="center-txt">Caption</h2>
-
-				<!-- Image Props -->
-				<div class="hbox centered-main box-spacing-sm padding-sm">
-					<div class="hbox centered-cross box-spacing-xxs">
-						<img class="icon" src="/resources/shutter-speed.svg"
-							alt="Camera shutter speed">
-						<h3>1/200</h3>
-					</div>
-					<div class="hbox centered-cross box-spacing-xxs">
-						<img class="icon" src="/resources/aperture.svg" alt="Camera aperture">
-						<h3>f/1.8</h3>
-					</div>
-
-					<div class="flex-one margin-m"></div>
-
-					<div class="hbox centered-cross box-spacing-xxs">
-						<img class="icon" src="/resources/iso.svg" alt="Camera iso">
-						<h3>800</h3>
-					</div>
-					<div class="hbox centered-cross box-spacing-xxs">
-						<img class="icon" src="/resources/focal-length.svg"
-							alt="Camera focal length">
-						<h3>18mm</h3>
-					</div>
-				</div>
 			</div>
 		</dialog>
 
@@ -59,48 +41,49 @@
 			<div class="flex-one margin-m"></div>
 
 			<!-- Indicator -->
-			<div id="indicator" class="hbox centered-main box-spacing-m">
-				<div class="vbox center-main">
+			<div class="vbox centered-main">
+				<div id="indicator" class="hbox centered-main box-spacing-m">
 					<h2 id="indicator-text" class="fade-in-text font-size-xl font-weight-n squish">
 						Albums
 					</h2>
-					<div class="hbox centered-main centered-cross box-spacing-xs align-start">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-							fill="currentColor"
-							class="display-none rotate-180 animated cursor-point icon">
-							<path
-								d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z" />
-						</svg>
 
-						<h3 id="album-name"
-							class="font-size-s font-weight-n add-fade-out no-wrap">
-						</h3>
+					<div class="vbox box-spacing-sm">
+						<svg class="collapsible" width="15" height="15" fill="none"
+							stroke="black" xmlns="http://www.w3.org/2000/svg">
+							<ellipse cx="7.5" cy="7.5" rx="7.5" ry="7.5" />
+						</svg>
+						<svg class="collapsible" width="15" height="15" fill="none"
+							stroke="black" xmlns="http://www.w3.org/2000/svg">
+							<ellipse cx="7.5" cy="7.5" rx="7.5" ry="7.5" />
+						</svg>
+						<svg id="indicator-active" width="15" height="15"
+							xmlns="http://www.w3.org/2000/svg">
+							<ellipse cx="7.5" cy="7.5" rx="7.5" ry="7.5" />
+						</svg>
 					</div>
+
+
 				</div>
 
-				<div class="vbox box-spacing-sm">
-					<svg class="collapsible" width="15" height="15" fill="none" stroke="black"
-						xmlns="http://www.w3.org/2000/svg">
-						<ellipse cx="7.5" cy="7.5" rx="7.5" ry="7.5" />
+				<div class="hbox centered-main centered-cross box-spacing-xs align-start">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+						class="display-none rotate-180 animated cursor-point icon2">
+						<path
+							d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z" />
 					</svg>
-					<svg class="collapsible" width="15" height="15" fill="none" stroke="black"
-						xmlns="http://www.w3.org/2000/svg">
-						<ellipse cx="7.5" cy="7.5" rx="7.5" ry="7.5" />
-					</svg>
-					<svg id="indicator-active" width="15" height="15"
-						xmlns="http://www.w3.org/2000/svg">
-						<ellipse cx="7.5" cy="7.5" rx="7.5" ry="7.5" />
-					</svg>
+
+					<h3 id="album-name" class="font-size-s font-weight-n add-fade-out no-wrap">
+					</h3>
 				</div>
 			</div>
 
-			<div class="flex-one header-bspacer margin-l"></div>
+			<div class="flex-one header-bspacer margin-m"></div>
 		</div>
 
 
 		<div class="vbox centered-main centered-cross stretched-height box-spacing-m padding-m">
 			<!-- AlbumThumbnails -->
-			<div id="album-thumbnails" class="photo-wall center-self">
+			<div id="album-thumbnails" class="photo-wall center-self stretched-height">
 			</div>
 		</div>
 	</div>

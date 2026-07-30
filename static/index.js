@@ -63,7 +63,12 @@ function onHome() {
 		// Root container
 		const homePageContent = document.createElement("div");
 		homePageContent.id = "home-page-content";
-		homePageContent.classList.add("vbox", "centered-cross", "stretched-height");
+		homePageContent.classList.add(
+			"vbox",
+			"centered-cross",
+			"stretched-height",
+			"no-select",
+		);
 
 		// Header row (logo + title)
 		const headerRow = document.createElement("div");
@@ -220,7 +225,12 @@ function onHome() {
 		// Root container
 		const homePageContent = document.createElement("div");
 		homePageContent.id = "home-page-content";
-		homePageContent.classList.add("vbox", "centered-cross", "stretched-height");
+		homePageContent.classList.add(
+			"vbox",
+			"centered-cross",
+			"stretched-height",
+			"no-select",
+		);
 
 		// Header row (logo + title)
 		const headerRow = document.createElement("div");
@@ -248,7 +258,7 @@ function onHome() {
 
 		// Content row (welcome-text + welcome-img side by side)
 		const contentRow = document.createElement("div");
-		contentRow.classList.add("hbox", "centered-main");
+		contentRow.classList.add("hbox", "centered-main", "stretched-height");
 
 		// Welcome text column
 		const welcomeText = document.createElement("div");
@@ -264,11 +274,18 @@ function onHome() {
 
 		const p2 = document.createElement("p");
 		p2.classList.add(ANIMATION_DELAY, "fade", "animated", "add-fade-out");
-		p2.textContent =
-			"I want to capture them...and in order to do that I ask, let me into your world even if just for a brief moment.";
+		p2.textContent = "I want to capture them";
 
 		const spacer2 = document.createElement("div");
 		spacer2.classList.add("flex-one", "margin-m");
+
+		const p3 = document.createElement("p");
+		p3.classList.add(ANIMATION_DELAY, "fade", "animated", "add-fade-out");
+		p3.textContent =
+			"...and in order to do that I ask, let me into your world even if just for a brief moment.";
+
+		const spacer3 = document.createElement("div");
+		spacer3.classList.add("flex-one", "margin-m");
 
 		// Indicator
 		const indicator = document.createElement("div");
@@ -318,6 +335,8 @@ function onHome() {
 		welcomeText.appendChild(spacer1);
 		welcomeText.appendChild(p2);
 		welcomeText.appendChild(spacer2);
+		welcomeText.appendChild(p3);
+		welcomeText.appendChild(spacer3);
 		welcomeText.appendChild(indicator);
 
 		// Welcome image
@@ -364,7 +383,14 @@ function onHome() {
 function onAlbums() {
 	readjustHeader();
 
+	document
+		.getElementById("modal-close-btn")
+		.addEventListener("pointerdown", () => {
+			modal.classList.add("closing");
+		});
+
 	const modal = document.getElementById("photo-modal");
+
 	modal.addEventListener("pointerdown", (e) => {
 		if (e.target === modal) {
 			modal.classList.add("closing");
@@ -442,8 +468,7 @@ function onAlbums() {
 	);
 
 	const arrow =
-		document.getElementById("indicator").firstElementChild.lastElementChild
-			.firstElementChild;
+		document.getElementById("indicator").nextElementSibling.firstElementChild;
 
 	arrow.addEventListener("pointerdown", () => {
 		if (!state.lastSet) return;
@@ -464,8 +489,7 @@ function onAlbums() {
 		arrow.classList.replace("display-block", "display-none");
 
 		const albumName =
-			document.getElementById("indicator").firstElementChild.lastElementChild
-				.lastElementChild;
+			document.getElementById("indicator").nextElementSibling.lastElementChild;
 		albumName.innerText = "";
 		albumName.classList.replace("fade-in-text", "fade-out");
 		state.lastSet = null;
@@ -507,8 +531,8 @@ function onAlbums() {
 				arrow.classList.replace("display-none", "display-block");
 
 				const albumName =
-					document.getElementById("indicator").firstElementChild
-						.lastElementChild.lastElementChild;
+					document.getElementById("indicator").nextElementSibling
+						.lastElementChild;
 				albumName.innerText = "Album Name";
 
 				albumName.classList.remove("fade-out");
