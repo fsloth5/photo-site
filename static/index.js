@@ -1,6 +1,4 @@
 const PHOTO_WALL_COVER_SIZES = ["small", "medium", "tall", "wide", "huge"];
-const GRAY_PLACEHOLDER =
-	'data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3Crect width="1" height="1" fill="%23cccccc"/%3E%3C/svg%3E';
 const ANIMATION_DELAY = "delay_015";
 
 const state = { lastSet: null };
@@ -103,7 +101,7 @@ function onHome() {
 			"fade",
 			"add-fade-out",
 		);
-		welcomeImg.src = "/resources/main.webp";
+		welcomeImg.src = "/resources/main2.webp";
 		welcomeImg.alt = "A portrait of a woman";
 
 		// Caption / welcome-text
@@ -347,6 +345,7 @@ function onHome() {
 			ANIMATION_DELAY,
 			"fade",
 			"add-fade-out",
+			"stretched-height",
 		);
 		welcomeImg.src = "/resources/main.webp";
 		welcomeImg.alt = "A portrait of a woman";
